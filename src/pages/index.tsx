@@ -2,6 +2,7 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import bg from "../../public/images/home/bg.png";
+import mobile from "../../public/images/home/mobile.jpg";
 import kite from "../../public/images/home/kite.jpg";
 import { Button, Container } from "../components/index";
 import Navbar from "~/components/Navbar";
@@ -41,13 +42,18 @@ const Home: NextPage = () => {
             <Image
               src={bg}
               alt="kiteboarder jumping"
-              className="z-0 h-screen  w-screen object-cover"
+              className="z-0 hidden  h-screen w-screen object-cover md:block"
+            ></Image>
+            <Image
+              src={mobile}
+              alt="kiteboarder jumping"
+              className="z-0 block  h-screen w-screen object-cover md:hidden"
             ></Image>
           </motion.div>
           <Container maxWidth="7xl" className="z-0 m-auto">
             <motion.div
               style={{ scale, opacity }}
-              className="absolute bottom-0 z-20 flex flex-col gap-6 pb-16"
+              className="absolute bottom-0  z-20 flex flex-col gap-6 pb-24 md:pb-16 "
             >
               <h1 className="max max-w-xl text-5xl font-bold md:text-7xl">
                 Take Your Kitesurfing to New Heights
