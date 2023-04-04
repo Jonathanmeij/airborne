@@ -1,9 +1,11 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import bg from "../../public/images/home/bg.png";
 import mobile from "../../public/images/home/mobile.jpg";
 import kite from "../../public/images/home/kite.jpg";
+import wetsuit from "../../public/images/home/wetsuit.jpg";
+import board from "../../public/images/home/board.jpg";
 import { Button, Container } from "../components/index";
 import Navbar from "~/components/Navbar";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -168,7 +170,7 @@ function KitesSection() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "start start"],
+    offset: ["start end", "end end"],
   });
 
   const scale = useTransform(scrollYProgress, [0, 0.9], [0.8, 1]);
@@ -196,36 +198,70 @@ function KitesSection() {
           </p>
         </div>
         <div className=" mb-12 grid w-full grid-cols-1 gap-6 ">
-          <GridElement key="1" />
-          <GridElement key="2" />
-          <GridElement key="3" />
+          <GridElement key="1" image={kite}>
+            <h3 className=" text-2xl font-semibold">Kites</h3>
+            <p className="max-w-md">
+              Fly high with the new range of kites. Choose from a wide range of
+              shapes and sizes.
+            </p>
+            <Button color="secondary">Shop Now</Button>
+          </GridElement>
+          <GridElement key="2" image={wetsuit}>
+            <h3 className=" text-2xl font-semibold">Wetsuits</h3>
+            <p className="max-w-md">
+              Stay warm and dry with our range of wetsuits. Choose from a wide
+              range of shapes and sizes.
+            </p>
+            <Button color="secondary">Shop Now</Button>
+          </GridElement>
+          <GridElement key="3" image={board}>
+            <h3 className=" text-2xl font-semibold">Boards</h3>
+            <p className="max-w-md">
+              Reach new speeds with our range of boards. Choose from a wide
+              range of shapes and sizes.
+            </p>
+            <Button color="secondary">Shop Now</Button>
+          </GridElement>
         </div>
       </Container>
     </motion.div>
   );
 }
 
-function GridElement() {
+function GridElement({
+  children,
+  image,
+}: {
+  children?: React.ReactNode;
+  image: StaticImageData;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "end end"],
+    offset: ["start end", "center center"],
   });
 
   const scale = useTransform(scrollYProgress, [0, 0.9], [0.7, 1]);
-  const bgOpacity = useTransform(scrollYProgress, [0, 0.9], [0, 0.5]);
+  const bgOpacity = useTransform(scrollYProgress, [0, 0.9], [0, 0.7]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.5, 0.9], [0, 0, 1]);
 
   return (
     <motion.div
       style={{ scale }}
       ref={ref}
-      className="relative h-[70vh] overflow-hidden rounded-xl   bg-gray-800 "
+      className="relative h-[70vh] overflow-hidden rounded-xl bg-gray-800 "
     >
       <motion.div
         style={{ opacity: bgOpacity }}
-        className="absolute top-0 z-10 h-full w-full bg-gray-900 opacity-50"
+        className=" absolute top-0 z-10 h-full w-full bg-gray-950 opacity-50"
       />
-      <Image src={kite} alt="kite" className=" h-full object-cover" />
+      <Image src={image} alt="kite" className=" h-full  object-cover" />
+      <motion.div
+        style={{ opacity: textOpacity }}
+        className="absolute top-0 z-10 flex h-full w-full flex-col items-center justify-center gap-4 p-4 text-center "
+      >
+        {children}
+      </motion.div>
     </motion.div>
   );
 }
