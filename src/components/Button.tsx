@@ -10,7 +10,7 @@ const buttonStyles = cva("font-semibold text-lg  border-1", {
       primary:
         " bg-orange-600 text-white hover:bg-orange-700  border-orange-600",
       secondary:
-        " bg-white text-san-marino-900 hover:bg-san-marino-50 shadow-md",
+        " bg-white text-black  text-san-marino-900 hover:bg-gray-200 shadow-md",
       secondaryDarker:
         " border border-gray-300 text-san-marino-900 hover:bg-san-marino-100",
       none: "bg-transparent hover:bg-san-marino-50 border-0",
