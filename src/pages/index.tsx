@@ -44,12 +44,12 @@ const Home: NextPage = () => {
               className="z-0 h-screen  w-screen object-cover"
             ></Image>
           </motion.div>
-          <Container maxWidth="8xl" className="z-0 m-auto">
+          <Container maxWidth="7xl" className="z-0 m-auto">
             <motion.div
               style={{ scale, opacity }}
               className="absolute bottom-0 z-20 flex flex-col gap-6 pb-16"
             >
-              <h1 className="max max-w-xl text-7xl font-bold">
+              <h1 className="max max-w-xl text-5xl font-bold md:text-7xl">
                 Take Your Kitesurfing to New Heights
               </h1>
               <p className="max text-md z-0 max-w-lg font-light">
@@ -87,6 +87,73 @@ export default Home;
 //   );
 // }
 
+// function KitesSection() {
+//   const ref = useRef<HTMLDivElement>(null);
+//   const { scrollYProgress } = useScroll({
+//     target: ref,
+//     offset: ["start end", "start start"],
+//   });
+
+//   const scale = useTransform(scrollYProgress, [0, 0.9], [0.8, 1]);
+
+//   return (
+//     <section className="relative h-[200vh]  w-screen">
+//       <div ref={ref} className="sticky top-16">
+//         <Container maxWidth="none" className=" m-auto ">
+//           <motion.div
+//             style={{ scale }}
+//             className="w-fulll relative h-[calc(100vh-84px)] overflow-hidden rounded-xl bg-gray-900"
+//           >
+//             {/* <div className="absolute top-0 z-10 h-screen w-full bg-gray-900 opacity-50" />
+//             <Image
+//               src={kite}
+//               alt="kite"
+//               className=" z-0 h-[calc(100vh-84px)] w-full object-cover saturate-50"
+//             /> */}
+//           </motion.div>
+//         </Container>
+//       </div>
+//     </section>
+//   );
+// }
+
+// function KitesSection() {
+//   const ref = useRef<HTMLDivElement>(null);
+//   const { scrollYProgress } = useScroll({
+//     target: ref,
+//     offset: ["start end", "start start"],
+//   });
+
+//   const scale = useTransform(scrollYProgress, [0, 0.9], [1, 1]);
+//   const borderRadius = useTransform(scrollYProgress, [0, 0.9], [20, 0]);
+
+//   return (
+//     <section className="relative h-[250vh] w-screen">
+//       <div ref={ref} className="sticky top-16">
+//         <motion.div
+//           style={{ scale }}
+//           className="w-fulll relative h-[calc(100vh-84px)] overflow-hidden rounded-xl bg-gray-900"
+//         >
+//           <Container maxWidth="none" className=" m-auto ">
+//             <div className=" flex  flex-col items-center py-8 text-center">
+//               <h2 className=" w-max pb-4 text-4xl font-medium">
+//                 Discover our <span className=" font-bold"> Products</span>
+//               </h2>
+//               <p className="max-w-2xl">
+//                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
+//                 Quisquam quod, voluptate, quia, voluptatum quas voluptates
+//                 quibusdam voluptatibus quae quidem quos nemo. Quisquam, quae.
+//                 Quisquam, quae. Quisquam, quae. Quisquam, quae. Quisquam, quae.
+//                 Quisquam, quae.
+//               </p>
+//             </div>
+//           </Container>
+//         </motion.div>
+//       </div>
+//     </section>
+//   );
+// }
+
 function KitesSection() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -95,25 +162,61 @@ function KitesSection() {
   });
 
   const scale = useTransform(scrollYProgress, [0, 0.9], [0.8, 1]);
+  const borderRadius = useTransform(scrollYProgress, [0, 0.9], [20, 0]);
 
   return (
-    <section className="relative h-[200vh]  w-screen">
-      <div ref={ref} className="sticky top-16">
-        <Container maxWidth="none" className=" m-auto ">
-          <motion.div
-            style={{ scale }}
-            className="relative overflow-hidden rounded-xl"
-          >
-            <div className="absolute top-0 z-10 h-screen w-full bg-gray-900 opacity-50" />
-            <Image
-              src={kite}
-              alt="kite"
-              className=" z-0 h-[calc(100vh-84px)] w-full object-cover saturate-50"
-            />
-          </motion.div>
-        </Container>
-      </div>
-    </section>
+    <motion.div
+      style={{ borderRadius }}
+      ref={ref}
+      className="relative min-h-screen  bg-gray-900"
+    >
+      <Container
+        maxWidth="8xl"
+        className=" m-auto flex min-h-screen flex-col items-center justify-center"
+      >
+        <div className=" flex flex-col items-center justify-center py-12">
+          <h2 className=" pb-4 text-center text-4xl font-medium">
+            Discover our <span className=" font-bold"> Products</span>
+          </h2>
+          <p className="max-w-2xl text-center">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+            quod, voluptate, quia, voluptatum quas voluptates quibusdam
+            voluptatibus quae quidem quos nemo. Quisquam, quae. Quisquam, quae.
+            Quisquam, quae. Quisquam, quae. Quisquam, quae. Quisquam, quae.
+          </p>
+        </div>
+        <div className=" mb-12 grid w-full grid-cols-1 gap-6 ">
+          <GridElement key="1" />
+          <GridElement key="2" />
+          <GridElement key="3" />
+        </div>
+      </Container>
+    </motion.div>
+  );
+}
+
+function GridElement() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end end"],
+  });
+
+  const scale = useTransform(scrollYProgress, [0, 0.9], [0.7, 1]);
+  const bgOpacity = useTransform(scrollYProgress, [0, 0.9], [0, 0.5]);
+
+  return (
+    <motion.div
+      style={{ scale }}
+      ref={ref}
+      className="relative h-[70vh] overflow-hidden rounded-xl   bg-gray-800 "
+    >
+      <motion.div
+        style={{ opacity: bgOpacity }}
+        className="absolute top-0 z-10 h-full w-full bg-gray-900 opacity-50"
+      />
+      <Image src={kite} alt="kite" className=" h-full object-cover" />
+    </motion.div>
   );
 }
 
