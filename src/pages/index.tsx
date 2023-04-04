@@ -50,20 +50,24 @@ const Home: NextPage = () => {
               className="z-0 block  h-screen w-screen object-cover md:hidden"
             ></Image>
           </motion.div>
-          <Container maxWidth="7xl" className="z-0 m-auto">
+          <Container maxWidth="7xl" className=" relative z-20 m-auto">
             <motion.div
               style={{ scale, opacity }}
-              className="absolute bottom-0  z-20 flex flex-col gap-6 pb-24 md:pb-16 "
+              className="absolute bottom-0 z-20 flex flex-col gap-4  pb-24 pr-4 text-center md:gap-6 md:pb-16 md:pr-0  md:text-left"
             >
               <h1 className="max max-w-xl text-5xl font-bold md:text-7xl">
                 Take Your Kitesurfing to New Heights
               </h1>
-              <p className="max text-md z-0 max-w-lg font-light">
+              <p className="max md:text-md z-0 max-w-lg text-lg font-light">
                 Airborne Kiteboarding offers a wide range of kitesurfing gear
                 for all levels of riders, from beginner packages to
                 high-performance gear.
               </p>
-              <Button color="primary" padding="wide" className=" self-start">
+              <Button
+                color="primary"
+                padding="wide"
+                className=" mx-auto self-start md:mx-0"
+              >
                 SHOP NOW
               </Button>
             </motion.div>
