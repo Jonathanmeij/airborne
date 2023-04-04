@@ -19,6 +19,7 @@ const containerStyles = cva("px-4 md:px-6 ", {
       "6xl": "max-w-6xl",
       "7xl": "max-w-7xl",
       "8xl": "max-w-[90rem]",
+      "9xl": "max-w-[100rem]",
       full: "max-w-full",
     },
   },
