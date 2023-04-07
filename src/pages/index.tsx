@@ -20,6 +20,7 @@ const Home: NextPage = () => {
 
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.7]);
   const opacity = useTransform(scrollYProgress, [0, 0.45], [1, 0]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.35], [1, 0]);
 
   const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
   const gradientOpacity = useTransform(scrollYProgress, [0, 0.45], [0.4, 0]);
@@ -63,7 +64,7 @@ const Home: NextPage = () => {
           </motion.div>
           <Container maxWidth="7xl" className=" relative z-20 m-auto">
             <motion.div
-              style={{ scale, opacity }}
+              style={{ scale, opacity: textOpacity }}
               className="absolute bottom-0 z-20 flex flex-col gap-4  pb-24 pr-4 text-center md:gap-6 md:pb-16 md:pr-0  md:text-left"
             >
               <h1 className="max max-w-xl text-5xl font-bold md:text-7xl">
