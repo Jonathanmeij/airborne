@@ -207,9 +207,14 @@ function GridElement({
       />
       <motion.div
         style={{ opacity: textOpacity }}
-        className="absolute top-0 z-10 flex h-full w-full flex-col  justify-center gap-4 p-4  "
+        className="absolute top-0 z-10  h-full w-full   p-4  "
       >
-        {children}
+        <Container
+          maxWidth="7xl"
+          className="m-auto flex h-full w-full flex-col justify-center gap-4"
+        >
+          {children}
+        </Container>
       </motion.div>
     </motion.div>
   );
@@ -220,26 +225,28 @@ function GridElement({
 function AboutUsSection() {
   return (
     <div className="h-max w-full bg-bunker-900 md:h-screen">
-      <div className=" md:max-w-8xl mx-auto h-full w-full md:flex md:items-center">
-        <Image
-          src={about_us}
-          alt="group picture on beach"
-          className="w-full object-cover md:h-2/3 md:w-3/5 "
-        />
-        <div className="b m-6 rounded p-4">
-          <h2 className=" pb-4  text-4xl font-medium md:w-2/5">
-            About <span className=" font-bold"> Us</span>
-          </h2>
-          <p className="max-w-2xl  font-light text-gray-300">
-            We are a small team of passionate kitesurfers who love to share our
-            passion with others. We are based in the beautiful city of Amsterdam
-            and we are always ready to help you with any questions you might
-            have. Feel free to contact us.We are based in the beautiful city of
-            Amsterdam and we are always ready to help you with any questions you
-            might have. Feel free to contact us.
-          </p>
+      <Container maxWidth="7xl" className="m-auto h-screen">
+        <div className=" md:max-w-8xl mx-auto h-full w-full md:flex md:items-center">
+          <Image
+            src={about_us}
+            alt="group picture on beach"
+            className="hp w-full rounded object-cover md:h-2/3 md:w-3/5 "
+          />
+          <div className="md:ml-6 md:rounded">
+            <h2 className=" pb-4  text-4xl font-medium md:w-2/5">
+              About <span className=" font-bold"> Us</span>
+            </h2>
+            <p className="max-w-2xl  font-light text-gray-300">
+              We are a small team of passionate kitesurfers who love to share
+              our passion with others. We are based in the beautiful city of
+              Amsterdam and we are always ready to help you with any questions
+              you might have. Feel free to contact us.We are based in the
+              beautiful city of Amsterdam and we are always ready to help you
+              with any questions you might have. Feel free to contact us.
+            </p>
+          </div>
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

@@ -63,16 +63,7 @@ export default function Navbar() {
             <LinkButton padding="small" font="normal" to="/boards">
               <li>Boards</li>
             </LinkButton>
-            <LinkButton
-              className="flex items-center"
-              padding="none"
-              font="normal"
-              to="/search"
-            >
-              <li className="flex gap-3">
-                <Image src={search} alt="" />
-              </li>
-            </LinkButton>
+
             <LinkButton
               className="flex items-center"
               padding="none"
