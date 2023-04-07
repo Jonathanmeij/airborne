@@ -3,9 +3,11 @@ import Head from "next/head";
 import Image, { type StaticImageData } from "next/image";
 import bg from "../../public/images/home/bg.png";
 import mobile from "../../public/images/home/mobile.jpg";
-import kite from "../../public/images/home/kite.jpg";
-import wetsuit from "../../public/images/home/wetsuit.jpg";
-import board from "../../public/images/home/board.jpg";
+import kite_product from "../../public/images/home/kite_product.png";
+import wetsuit_product from "../../public/images/home/wetsuit_product.png";
+import kiteboard from "../../public/images/home/kiteboard.png";
+import about_us from "../../public/images/home/about_us.png";
+
 import { Button, Container } from "../components/index";
 import Navbar from "~/components/Navbar";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -23,7 +25,7 @@ const Home: NextPage = () => {
   const textOpacity = useTransform(scrollYProgress, [0, 0.35], [1, 0]);
 
   const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
-  const gradientOpacity = useTransform(scrollYProgress, [0, 0.45], [0.4, 0]);
+  const gradientOpacity = useTransform(scrollYProgress, [0, 0.45], [0.5, 0]);
   const mobileScreenOpacity = useTransform(
     scrollYProgress,
     [0, 0.45],
@@ -43,7 +45,7 @@ const Home: NextPage = () => {
         <div ref={ref} className="fixed">
           <motion.div
             style={{ opacity: mobileScreenOpacity, scale: imageScale }}
-            className="fixed top-0 z-10  h-screen  w-screen bg-black  md:hidden"
+            className="fixed top-0 z-10  h-screen  w-screen bg-black  "
           ></motion.div>
           <motion.div
             style={{ opacity: gradientOpacity, scale: imageScale }}
@@ -54,18 +56,18 @@ const Home: NextPage = () => {
             <Image
               src={bg}
               alt="kiteboarder jumping"
-              className="z-0 hidden  h-screen w-screen object-cover md:block"
+              className="z-0 hidden h-screen w-screen object-cover contrast-125 saturate-[20%] md:block"
             ></Image>
             <Image
               src={mobile}
               alt="kiteboarder jumping"
-              className="z-0 block  h-screen w-screen object-cover md:hidden"
+              className="z-0 block  h-screen w-screen object-cover contrast-125 saturate-[20%] md:hidden"
             ></Image>
           </motion.div>
           <Container maxWidth="7xl" className=" relative z-20 m-auto">
             <motion.div
               style={{ scale, opacity: textOpacity }}
-              className="absolute bottom-0 z-20 flex flex-col gap-4  pb-24 pr-4 text-center md:gap-6 md:pb-16 md:pr-0  md:text-left"
+              className="absolute bottom-0 z-20 flex flex-col gap-4  pb-24 pr-4  md:gap-6 md:pb-16 md:pr-0  md:text-left"
             >
               <h1 className="max max-w-xl text-5xl font-bold md:text-7xl">
                 Take Your Kitesurfing to New Heights
@@ -78,7 +80,7 @@ const Home: NextPage = () => {
               <Button
                 color="primary"
                 padding="wide"
-                className=" mx-auto self-start md:mx-0"
+                className=" self-start md:mx-0"
               >
                 SHOP NOW
               </Button>
@@ -89,92 +91,13 @@ const Home: NextPage = () => {
 
       <div className=" w-full ">
         <KitesSection />
+        <AboutUsSection />
       </div>
     </>
   );
 };
 
 export default Home;
-
-// function KitesSection() {
-//   return (
-//     <div className="relative h-screen w-screen">
-//       <div className="absolute top-0 z-10 h-screen w-screen bg-gray-900 opacity-50" />
-//       <Image
-//         src={kite}
-//         alt="kite"
-//         className=" h-screen w-screen object-cover saturate-50"
-//       ></Image>
-//     </div>
-//   );
-// }
-
-// function KitesSection() {
-//   const ref = useRef<HTMLDivElement>(null);
-//   const { scrollYProgress } = useScroll({
-//     target: ref,
-//     offset: ["start end", "start start"],
-//   });
-
-//   const scale = useTransform(scrollYProgress, [0, 0.9], [0.8, 1]);
-
-//   return (
-//     <section className="relative h-[200vh]  w-screen">
-//       <div ref={ref} className="sticky top-16">
-//         <Container maxWidth="none" className=" m-auto ">
-//           <motion.div
-//             style={{ scale }}
-//             className="w-fulll relative h-[calc(100vh-84px)] overflow-hidden rounded-xl bg-gray-900"
-//           >
-//             {/* <div className="absolute top-0 z-10 h-screen w-full bg-gray-900 opacity-50" />
-//             <Image
-//               src={kite}
-//               alt="kite"
-//               className=" z-0 h-[calc(100vh-84px)] w-full object-cover saturate-50"
-//             /> */}
-//           </motion.div>
-//         </Container>
-//       </div>
-//     </section>
-//   );
-// }
-
-// function KitesSection() {
-//   const ref = useRef<HTMLDivElement>(null);
-//   const { scrollYProgress } = useScroll({
-//     target: ref,
-//     offset: ["start end", "start start"],
-//   });
-
-//   const scale = useTransform(scrollYProgress, [0, 0.9], [1, 1]);
-//   const borderRadius = useTransform(scrollYProgress, [0, 0.9], [20, 0]);
-
-//   return (
-//     <section className="relative h-[250vh] w-screen">
-//       <div ref={ref} className="sticky top-16">
-//         <motion.div
-//           style={{ scale }}
-//           className="w-fulll relative h-[calc(100vh-84px)] overflow-hidden rounded-xl bg-gray-900"
-//         >
-//           <Container maxWidth="none" className=" m-auto ">
-//             <div className=" flex  flex-col items-center py-8 text-center">
-//               <h2 className=" w-max pb-4 text-4xl font-medium">
-//                 Discover our <span className=" font-bold"> Products</span>
-//               </h2>
-//               <p className="max-w-2xl">
-//                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
-//                 Quisquam quod, voluptate, quia, voluptatum quas voluptates
-//                 quibusdam voluptatibus quae quidem quos nemo. Quisquam, quae.
-//                 Quisquam, quae. Quisquam, quae. Quisquam, quae. Quisquam, quae.
-//                 Quisquam, quae.
-//               </p>
-//             </div>
-//           </Container>
-//         </motion.div>
-//       </div>
-//     </section>
-//   );
-// }
 
 function KitesSection() {
   const ref = useRef<HTMLDivElement>(null);
@@ -209,29 +132,40 @@ function KitesSection() {
           </p>
         </motion.div>
         <div className=" mb-12 grid w-full grid-cols-1 gap-6 ">
-          <GridElement key="1" image={kite}>
-            <h3 className=" text-2xl font-semibold">Kites</h3>
-            <p className="max-w-md">
-              Fly high with the new range of kites. Choose from a wide range of
-              shapes and sizes.
+          <GridElement key="1" image={kite_product}>
+            <h3 className=" text-2xl font-semibold">Sailor V2</h3>
+            <p className="max-w-sm">
+              With the new Sailor V2, you peform at your best in any condition.
             </p>
-            <Button color="secondary">Shop Now</Button>
+            <div>
+              <Button rounded="rounded" color="secondary">
+                Shop Now
+              </Button>
+            </div>
           </GridElement>
-          <GridElement key="2" image={wetsuit}>
-            <h3 className=" text-2xl font-semibold">Wetsuits</h3>
-            <p className="max-w-md">
-              Stay warm and dry with our range of wetsuits. Choose from a wide
-              range of shapes and sizes.
+          <GridElement key="2" image={wetsuit_product}>
+            <h3 className=" text-2xl font-semibold">SurfShield</h3>
+            <p className="max-w-sm">
+              Stay warm and dry with the new SurfShield wetsuit. Specially
+              designed for rough conditions.
             </p>
-            <Button color="secondary">Shop Now</Button>
+            <div>
+              <Button rounded="rounded" color="secondary">
+                Shop Now
+              </Button>
+            </div>
           </GridElement>
-          <GridElement key="3" image={board}>
-            <h3 className=" text-2xl font-semibold">Boards</h3>
-            <p className="max-w-md">
-              Reach new speeds with our range of boards. Choose from a wide
-              range of shapes and sizes.
+          <GridElement key="3" image={kiteboard}>
+            <h3 className=" text-2xl font-semibold">Glide V1</h3>
+            <p className="max-w-sm">
+              The new Glide V1 is the perfect board for beginners and
+              intermediate riders. Its easy to use.
             </p>
-            <Button color="secondary">Shop Now</Button>
+            <div>
+              <Button rounded="rounded" color="secondary">
+                Shop Now
+              </Button>
+            </div>
           </GridElement>
         </div>
       </Container>
@@ -252,7 +186,7 @@ function GridElement({
     offset: ["start end", "center center"],
   });
 
-  const scale = useTransform(scrollYProgress, [0, 0.9], [0.7, 1]);
+  const scale = useTransform(scrollYProgress, [0, 0.9], [0.8, 1]);
   const bgOpacity = useTransform(scrollYProgress, [0, 0.9], [0, 0.7]);
   const textOpacity = useTransform(scrollYProgress, [0, 0.5, 0.9], [0, 0, 1]);
 
@@ -260,16 +194,20 @@ function GridElement({
     <motion.div
       style={{ scale }}
       ref={ref}
-      className="relative h-[70vh] overflow-hidden rounded-xl bg-gray-800 "
+      className="relative h-[70vh] overflow-hidden rounded-lg bg-gray-800 "
     >
       <motion.div
         style={{ opacity: bgOpacity }}
         className=" absolute top-0 z-10 h-full w-full bg-gray-950 opacity-50"
       />
-      <Image src={image} alt="kite" className=" h-full  object-cover" />
+      <Image
+        src={image}
+        alt="kite"
+        className=" h-full w-full object-cover brightness-125 saturate-[30%] filter"
+      />
       <motion.div
         style={{ opacity: textOpacity }}
-        className="absolute top-0 z-10 flex h-full w-full flex-col items-center justify-center gap-4 p-4 text-center "
+        className="absolute top-0 z-10 flex h-full w-full flex-col  justify-center gap-4 p-4  "
       >
         {children}
       </motion.div>
@@ -278,3 +216,30 @@ function GridElement({
 }
 
 // h-[calc(100vh-64px)]
+
+function AboutUsSection() {
+  return (
+    <div className="h-max w-full bg-bunker-900 md:h-screen">
+      <div className=" md:max-w-8xl mx-auto h-full w-full md:flex md:items-center">
+        <Image
+          src={about_us}
+          alt="group picture on beach"
+          className="w-full object-cover md:h-2/3 md:w-3/5 "
+        />
+        <div className="b m-6 rounded p-4">
+          <h2 className=" pb-4  text-4xl font-medium md:w-2/5">
+            About <span className=" font-bold"> Us</span>
+          </h2>
+          <p className="max-w-2xl  font-light text-gray-300">
+            We are a small team of passionate kitesurfers who love to share our
+            passion with others. We are based in the beautiful city of Amsterdam
+            and we are always ready to help you with any questions you might
+            have. Feel free to contact us.We are based in the beautiful city of
+            Amsterdam and we are always ready to help you with any questions you
+            might have. Feel free to contact us.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
