@@ -18,11 +18,16 @@ const Home: NextPage = () => {
     offset: ["end end", "end start"],
   });
 
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
-  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.7]);
+  const opacity = useTransform(scrollYProgress, [0, 0.45], [1, 0]);
 
   const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
-  const gradientOpacity = useTransform(scrollYProgress, [0, 1], [0.6, 0]);
+  const gradientOpacity = useTransform(scrollYProgress, [0, 0.45], [0.4, 0]);
+  const mobileScreenOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.45],
+    [0.4, 0]
+  );
 
   return (
     <>
@@ -36,8 +41,12 @@ const Home: NextPage = () => {
 
         <div ref={ref} className="fixed">
           <motion.div
+            style={{ opacity: mobileScreenOpacity, scale: imageScale }}
+            className="fixed top-0 z-10  h-screen  w-screen bg-black  md:hidden"
+          ></motion.div>
+          <motion.div
             style={{ opacity: gradientOpacity, scale: imageScale }}
-            className="fixed top-0 z-10  h-screen  w-screen bg-gradient-to-br from-black to-transparent opacity-60"
+            className="fixed top-0 z-10  h-screen  w-screen bg-gradient-to-br from-black to-transparent opacity-70"
           ></motion.div>
 
           <motion.div style={{ scale: imageScale, opacity }}>
@@ -175,28 +184,29 @@ function KitesSection() {
 
   const scale = useTransform(scrollYProgress, [0, 0.9], [0.8, 1]);
   const borderRadius = useTransform(scrollYProgress, [0, 0.9], [20, 0]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
 
   return (
     <motion.div
       style={{ borderRadius }}
       ref={ref}
-      className="relative min-h-screen  bg-gray-900"
+      className="relative min-h-screen  "
     >
       <Container
         maxWidth="8xl"
         className=" m-auto flex min-h-screen flex-col items-center justify-center"
       >
-        <div className=" flex flex-col items-center justify-center py-12">
+        <motion.div
+          style={{ scale, opacity: textOpacity }}
+          className=" flex flex-col items-center justify-center py-12"
+        >
           <h2 className=" pb-4 text-center text-4xl font-medium">
             Discover our <span className=" font-bold"> Products</span>
           </h2>
           <p className="max-w-2xl text-center">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-            quod, voluptate, quia, voluptatum quas voluptates quibusdam
-            voluptatibus quae quidem quos nemo. Quisquam, quae. Quisquam, quae.
-            Quisquam, quae. Quisquam, quae. Quisquam, quae. Quisquam, quae.
+            Check the new 2023 range of kites, boards and wetsuits.
           </p>
-        </div>
+        </motion.div>
         <div className=" mb-12 grid w-full grid-cols-1 gap-6 ">
           <GridElement key="1" image={kite}>
             <h3 className=" text-2xl font-semibold">Kites</h3>
