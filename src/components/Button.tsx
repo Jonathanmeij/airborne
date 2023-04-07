@@ -4,10 +4,10 @@
 import { cva, type VariantProps } from "class-variance-authority";
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-const buttonStyles = cva("font-semibold text-lg  border-1", {
+const buttonStyles = cva("font-medium text-lg  border-1", {
   variants: {
     color: {
-      primary: " bg-sky-500 text-white hover:bg-blue-600  ",
+      primary: " bg-sky-500 text-white hover:bg-sky-600  ",
       secondary:
         " bg-white text-black  text-san-marino-900 hover:bg-gray-200 shadow-md",
       secondaryDarker:
@@ -39,6 +39,7 @@ const buttonStyles = cva("font-semibold text-lg  border-1", {
       normal: "font-normal",
       bold: "font-bold",
       semibold: "font-semibold",
+      medium: "font-medium",
     },
     textAlign: {
       left: "text-left",
@@ -52,7 +53,7 @@ const buttonStyles = cva("font-semibold text-lg  border-1", {
     fullWidth: false,
     rounded: "full",
     animate: false,
-    font: "semibold",
+    font: "medium",
     textAlign: "center",
   },
 });
