@@ -16,7 +16,7 @@ export default function Navbar() {
 
   const variants = {
     scrolled: {
-      backgroundColor: "#12181c",
+      backgroundColor: "#0a0d0f",
       backdropFilter: "blur(10px)",
     },
     notScrolled: {

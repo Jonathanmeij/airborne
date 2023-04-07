@@ -7,8 +7,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 const buttonStyles = cva("font-semibold text-lg  border-1", {
   variants: {
     color: {
-      primary:
-        " bg-orange-600 text-white hover:bg-orange-700  border-orange-600",
+      primary: " bg-sky-500 text-white hover:bg-blue-600  ",
       secondary:
         " bg-white text-black  text-san-marino-900 hover:bg-gray-200 shadow-md",
       secondaryDarker:
