@@ -54,13 +54,13 @@ export default function Navbar() {
             {/* <li>Kites</li>
             <li>Wetsuits</li>
             <li>Boards</li> */}
-            <LinkButton padding="small" font="normal" to="/kites">
+            <LinkButton padding="small" font="normal" to="/product/sailor">
               <li>Kites</li>
             </LinkButton>
-            <LinkButton padding="small" font="normal" to="/wetsuits">
+            <LinkButton padding="small" font="normal" to="/product/surfshield">
               <li>Wetsuits</li>
             </LinkButton>
-            <LinkButton padding="small" font="normal" to="/boards">
+            <LinkButton padding="small" font="normal" to="/product/glide">
               <li>Boards</li>
             </LinkButton>
 
