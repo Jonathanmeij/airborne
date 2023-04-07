@@ -70,7 +70,7 @@ const Home: NextPage = () => {
               <h1 className="max max-w-xl text-5xl font-bold md:text-7xl">
                 Take Your Kitesurfing to New Heights
               </h1>
-              <p className="max md:text-md z-0 max-w-lg text-lg font-light">
+              <p className="max md:text-md z-0 max-w-lg text-lg font-light text-gray-200">
                 Airborne Kiteboarding offers a wide range of kitesurfing gear
                 for all levels of riders, from beginner packages to
                 high-performance gear.
@@ -204,7 +204,7 @@ function KitesSection() {
           <h2 className=" pb-4 text-center text-4xl font-medium">
             Discover our <span className=" font-bold"> Products</span>
           </h2>
-          <p className="max-w-2xl text-center">
+          <p className="max-w-2xl text-center font-light text-gray-300">
             Check the new 2023 range of kites, boards and wetsuits.
           </p>
         </motion.div>
