@@ -110,7 +110,7 @@ const panelVariant = {
     x: 0,
     transition: {
       staggerChildren: 0.1,
-      delayChildren: 0.03,
+      delayChildren: 0.02,
     },
   },
   closed: {
@@ -126,7 +126,7 @@ const itemVariant = {
   },
   closed: {
     opacity: 0,
-    x: 20,
+    x: 40,
   },
 };
 
