@@ -5,7 +5,7 @@ import account from "../../public/images/icons/account.svg";
 import cart from "../../public/images/icons/cart.svg";
 import Image from "next/image";
 import LinkButton from "./LinkButton";
-import { motion, useScroll } from "framer-motion";
+import { AnimatePresence, motion, stagger, useScroll } from "framer-motion";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import Button from "./Button";
@@ -97,8 +97,35 @@ export default function Navbar() {
   );
 }
 
+const panelVariant = {
+  open: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.05,
+    },
+  },
+  closed: {
+    opacity: 0,
+    x: 20,
+  },
+};
+
+const itemVariant = {
+  open: {
+    opacity: 1,
+    x: 0,
+  },
+  closed: {
+    opacity: 0,
+    x: 20,
+  },
+};
+
 function MobileMenu() {
   const genericHamburgerLine = `h-1 w-8 my-1 rounded bg-white transition ease transform duration-300`;
+
   return (
     <div className="">
       <Popover className="">
@@ -129,102 +156,111 @@ function MobileMenu() {
                 }`}
               />
             </Popover.Button>
-            <Transition
-              as={Fragment}
-              enter="transition ease-out duration-200"
-              enterFrom="opacity-0 translate-y-1"
-              enterTo="opacity-100 translate-y-0"
-              leave="transition ease-in duration-150"
-              leaveFrom="opacity-100 translate-y-0"
-              leaveTo="opacity-0 translate-y-1"
-            >
-              <Popover.Panel className=" absolute left-0 z-50 mt-3 w-screen  transform sm:px-0 lg:max-w-3xl">
-                <Container maxWidth="7xl" className="m-auto">
-                  <div className=" overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                    <div className="relative grid gap-3 bg-white p-4 text-bunker-950 lg:grid-cols-2">
-                      <a
-                        href="/insights"
-                        className="flow-root rounded-md px-2 py-2 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                      >
-                        <span className="flex items-center">
-                          <span className="text-lg font-medium text-gray-900">
-                            Sailor V2
+            <AnimatePresence>
+              {open && (
+                <Popover.Panel
+                  as={motion.div}
+                  variants={panelVariant}
+                  initial="closed"
+                  animate="open"
+                  exit="closed"
+                  static
+                  className=" absolute left-0 z-50 mt-3 w-screen  transform sm:px-0 lg:max-w-3xl"
+                >
+                  <Container maxWidth="7xl" className="m-auto">
+                    <div className=" overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
+                      <div className="relative grid gap-3 bg-white p-4 text-bunker-950 lg:grid-cols-2">
+                        <MenuItem href="/products/sailor">
+                          <span className="flex items-center">
+                            <span className="text-lg font-medium text-gray-900">
+                              Sailor V2
+                            </span>
                           </span>
-                        </span>
-                        <span className="block text-sm text-gray-500">
-                          All around kite
-                        </span>
-                      </a>
-                      <a
-                        href="/automations"
-                        className="flow-root rounded-md px-2 py-2 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                      >
-                        <span className="flex items-center">
-                          <span className="text-lg font-medium text-gray-900">
-                            Surfshield
+                          <span className="block text-sm text-gray-500">
+                            All around kite
                           </span>
-                        </span>
-                        <span className="block text-sm text-gray-500">
-                          Wetsuit specially designed for rough conditions
-                        </span>
-                      </a>
-                      <a
-                        href="/reports"
-                        className="flow-root rounded-md px-2 py-2 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                      >
-                        <span className="flex items-center">
+                        </MenuItem>
+                        <MenuItem href="/products/surfshield">
+                          <span className="flex items-center">
+                            <span className="text-lg font-medium text-gray-900">
+                              Surfshield
+                            </span>
+                          </span>
+                          <span className="block text-sm text-gray-500">
+                            Wetsuit specially designed for rough conditions
+                          </span>
+                        </MenuItem>
+                        <MenuItem href="/products/glide">
                           <span className="text-lg font-medium text-gray-900">
                             Glide V1
                           </span>
-                        </span>
-                        <span className="block text-sm text-gray-500">
-                          Easy to use and fast board
-                        </span>
-                      </a>
-                    </div>
-                    <div className="bg-gray-50 p-4">
-                      <a
-                        href="##"
-                        className="flow-root rounded-md px-2 py-2  transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="white"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
+                          <span className="block text-sm text-gray-500">
+                            Easy to use and fast board
+                          </span>
+                        </MenuItem>
+                      </div>
+                      <div className="bg-gray-50 p-4">
+                        <a
+                          href="##"
+                          className="flow-root rounded-md px-2 py-2  transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                         >
-                          <path
-                            fill="black"
-                            d="M19 7.001c0 3.865-3.134 7-7 7s-7-3.135-7-7c0-3.867 3.134-7.001 7-7.001s7 3.134 7 7.001zm-1.598 7.18c-1.506 1.137-3.374 1.82-5.402 1.82-2.03 0-3.899-.685-5.407-1.822-4.072 1.793-6.593 7.376-6.593 9.821h24c0-2.423-2.6-8.006-6.598-9.819z"
-                          />
-                        </svg>
-                      </a>
-                      <a
-                        href="##"
-                        className="flow-root rounded-md px-2 py-2  transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="white"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="white"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              fill="black"
+                              d="M19 7.001c0 3.865-3.134 7-7 7s-7-3.135-7-7c0-3.867 3.134-7.001 7-7.001s7 3.134 7 7.001zm-1.598 7.18c-1.506 1.137-3.374 1.82-5.402 1.82-2.03 0-3.899-.685-5.407-1.822-4.072 1.793-6.593 7.376-6.593 9.821h24c0-2.423-2.6-8.006-6.598-9.819z"
+                            />
+                          </svg>
+                        </a>
+                        <a
+                          href="##"
+                          className="flow-root rounded-md px-2 py-2  transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                         >
-                          <path
-                            fill="black"
-                            d="M4.558 7l4.701-4.702c.199-.198.46-.298.721-.298.613 0 1.02.505 1.02 1.029 0 .25-.092.504-.299.711l-3.26 3.26h-2.883zm12.001 0h2.883l-4.701-4.702c-.199-.198-.46-.298-.721-.298-.613 0-1.02.505-1.02 1.029 0 .25.092.504.299.711l3.26 3.26zm-16.559 2v2h.643c.534 0 1.021.304 1.256.784l4.101 10.216h12l4.102-10.214c.233-.481.722-.786 1.256-.786h.642v-2h-24z"
-                          />
-                        </svg>
-                      </a>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="white"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              fill="black"
+                              d="M4.558 7l4.701-4.702c.199-.198.46-.298.721-.298.613 0 1.02.505 1.02 1.029 0 .25-.092.504-.299.711l-3.26 3.26h-2.883zm12.001 0h2.883l-4.701-4.702c-.199-.198-.46-.298-.721-.298-.613 0-1.02.505-1.02 1.029 0 .25.092.504.299.711l3.26 3.26zm-16.559 2v2h.643c.534 0 1.021.304 1.256.784l4.101 10.216h12l4.102-10.214c.233-.481.722-.786 1.256-.786h.642v-2h-24z"
+                            />
+                          </svg>
+                        </a>
+                      </div>
                     </div>
-                  </div>
-                </Container>
-              </Popover.Panel>
-            </Transition>
+                  </Container>
+                </Popover.Panel>
+              )}
+            </AnimatePresence>
           </>
         )}
       </Popover>
     </div>
+  );
+}
+
+function MenuItem({
+  children,
+  href,
+}: {
+  children: React.ReactNode;
+  href: string;
+}) {
+  return (
+    <motion.a
+      href={href}
+      variants={itemVariant}
+      className="flow-root rounded-md px-2 py-2  hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-sky-400 focus-visible:ring-opacity-50"
+    >
+      <span className="flex-row items-center">{children}</span>
+    </motion.a>
   );
 }
