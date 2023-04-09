@@ -12,7 +12,10 @@ async function main() {
       description:
         "With the new Sailor V2, you peform at your best in any condition. The new design is made to be more durable and has lighter materials.",
       price: 1299,
-      image: "/images/products/sailor-v2.jpg",
+      image: "/images/products/sailor-v2.png",
+      colors: ["#171717", "#f8fafc", "#ef4444", "#0ea5e9"],
+      sizes: ["6", "7", "8", "9", "10", "11", "12"],
+      title_id: "sailor-v2",
     },
   });
   await prisma.product.upsert({
@@ -25,7 +28,10 @@ async function main() {
       description:
         "Stay warm and dry with the new SurfShield wetsuit. Specially designed for rough conditions. The new design is made to be more durable and has lighter materials.",
       price: 149,
-      image: "/images/products/surfshield.jpg",
+      image: "/images/products/surfshield.png",
+      colors: ["#171717", "#1e293b"],
+      sizes: ["S", "M", "L", "XL"],
+      title_id: "surfshield",
     },
   });
   await prisma.product.upsert({
@@ -38,7 +44,10 @@ async function main() {
       description:
         "The new Glide V1 is the perfect board for beginners and intermediate riders. Its easy to use. It uses the latest technology to make the board as light as possible.",
       price: 499,
-      image: "/images/products/glide-v1.jpg",
+      image: "/images/products/glide-v1.png",
+      colors: ["#f8fafc", "#f8fafc", "#0ea5e9"],
+      sizes: ["125 X 38", "133 X 40", "138 X 41", "141 X 42"],
+      title_id: "glide-v1",
     },
   });
 }

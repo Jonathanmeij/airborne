@@ -62,9 +62,12 @@ model VerificationToken {
 model Product {
     id          String   @id @default(cuid())
     title        String
+    title_id    String  @unique
     description String
     price       Int
     image       String
+    sizes       String[]
+    colors      String[]
     createdAt   DateTime @default(now())
     updatedAt   DateTime @updatedAt
 }

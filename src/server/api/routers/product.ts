@@ -17,16 +17,16 @@ export const productRouter = createTRPCRouter({
       });
     }),
 
-  getProduct: publicProcedure
+  getProductByTitle: publicProcedure
     .input(
       z.object({
-        id: z.string(),
+        title_id: z.string(),
       })
     )
     .query(({ input, ctx }) => {
       return ctx.prisma.product.findUnique({
         where: {
-          id: input.id,
+          title_id: input.title_id,
         },
       });
     }),

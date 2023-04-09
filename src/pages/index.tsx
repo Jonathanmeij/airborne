@@ -8,7 +8,7 @@ import wetsuit_product from "../../public/images/products/surfshield.png";
 import kiteboard from "../../public/images/products/glide-v1.png";
 import about_us from "../../public/images/home/about_us.png";
 
-import { Button, Container } from "../components/index";
+import { Button, Container, LinkButton } from "../components/index";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Footer from "~/components/Footer";
@@ -138,9 +138,13 @@ function KitesSection() {
               With the new Sailor V2, you peform at your best in any condition.
             </p>
             <div>
-              <Button rounded="rounded" color="secondary">
+              <LinkButton
+                to="/product/sailor-v2"
+                rounded="rounded"
+                color="secondary"
+              >
                 Shop Now
-              </Button>
+              </LinkButton>
             </div>
           </GridElement>
           <GridElement key="2" image={wetsuit_product}>
@@ -150,9 +154,13 @@ function KitesSection() {
               designed for rough conditions.
             </p>
             <div>
-              <Button rounded="rounded" color="secondary">
+              <LinkButton
+                to="/product/surfshield"
+                rounded="rounded"
+                color="secondary"
+              >
                 Shop Now
-              </Button>
+              </LinkButton>
             </div>
           </GridElement>
           <GridElement key="3" image={kiteboard}>
@@ -162,9 +170,13 @@ function KitesSection() {
               intermediate riders. Its easy to use.
             </p>
             <div>
-              <Button rounded="rounded" color="secondary">
+              <LinkButton
+                to="/product/glide-v1"
+                rounded="rounded"
+                color="secondary"
+              >
                 Shop Now
-              </Button>
+              </LinkButton>
             </div>
           </GridElement>
         </div>

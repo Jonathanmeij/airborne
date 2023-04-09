@@ -67,25 +67,13 @@ export default function Navbar() {
             {/* <li>Kites</li>
             <li>Wetsuits</li>
             <li>Boards</li> */}
-            <LinkButton
-              padding="small"
-              font="normal"
-              to="/product/clg84dho9000052cw0h9063ki"
-            >
+            <LinkButton padding="small" font="normal" to="/product/sailor-v2">
               <li>Kites</li>
             </LinkButton>
-            <LinkButton
-              padding="small"
-              font="normal"
-              to="/product/clg84dhty000252cw27tsvifu"
-            >
+            <LinkButton padding="small" font="normal" to="/product/surfshield">
               <li>Wetsuits</li>
             </LinkButton>
-            <LinkButton
-              padding="small"
-              font="normal"
-              to="/product/clg84dhwb000452cww4qxgf6x"
-            >
+            <LinkButton padding="small" font="normal" to="/product/glide-v1">
               <li>Boards</li>
             </LinkButton>
 
@@ -189,10 +177,7 @@ function MobileMenu() {
                   <Container maxWidth="7xl" className="m-auto">
                     <div className=" overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                       <div className="relative grid gap-3 bg-white p-4 text-bunker-950 lg:grid-cols-2">
-                        <MenuItem
-                          close={close}
-                          href="/product/clg7xnnka0000523x2j8wa7z0"
-                        >
+                        <MenuItem close={close} href="/product/sailor-v2">
                           <span className="flex items-center">
                             <span className="text-lg font-medium text-gray-900">
                               Sailor V2
@@ -202,10 +187,7 @@ function MobileMenu() {
                             All around kite
                           </span>
                         </MenuItem>
-                        <MenuItem
-                          close={close}
-                          href="/product/clg84dhty000252cw27tsvifu"
-                        >
+                        <MenuItem close={close} href="/product/surfshield">
                           <span className="flex items-center">
                             <span className="text-lg font-medium text-gray-900">
                               Surfshield
@@ -215,10 +197,7 @@ function MobileMenu() {
                             Wetsuit specially designed for rough conditions
                           </span>
                         </MenuItem>
-                        <MenuItem
-                          close={close}
-                          href="/product/clg84dhwb000452cww4qxgf6x"
-                        >
+                        <MenuItem close={close} href="/product/glide-v1">
                           <span className="text-lg font-medium text-gray-900">
                             Glide V1
                           </span>

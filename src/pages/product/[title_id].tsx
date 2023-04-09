@@ -6,19 +6,17 @@ import { NextPage, type GetStaticProps } from "next";
 import { prisma } from "~/server/db";
 import { log } from "console";
 
-type Product = RouterOutputs["product"]["getProduct"];
-
 export const getStaticPaths = async () => {
   const products = await prisma.product.findMany({
     select: {
-      id: true,
+      title_id: true,
     },
   });
 
   return {
     paths: products.map((product) => ({
       params: {
-        id: product.id,
+        title_id: product.title_id,
       },
     })),
     fallback: "blocking",
@@ -30,36 +28,37 @@ export const getStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
   const ssg = generateSSGHelper();
 
-  const id = context.params?.id;
+  const title_id = context.params?.title_id;
 
-  if (typeof id !== "string") {
+  if (typeof title_id !== "string") {
     throw new Error("Invalid id");
   }
 
-  await ssg.product.getProduct.prefetch({ id });
+  await ssg.product.getProductByTitle.prefetch({ title_id });
 
   return {
     props: {
       trpcState: ssg.dehydrate(),
-      id,
+      title_id,
     },
   };
 };
 
-const ProductPage: NextPage<{ id: string }> = ({ id }) => {
-  const { data: product } = api.product.getProduct.useQuery({ id });
+const ProductPage: NextPage<{ title_id: string }> = ({ title_id }) => {
+  const { data: product } = api.product.getProductByTitle.useQuery({
+    title_id,
+  });
 
   if (!product) {
     return <div className="pt-16">Product does not exist</div>;
   }
 
-  const product_image = `../../../public${product.image}`;
-
   return (
     <div className="pt-16">
       <Image
-        style={{ width: "100%" }}
-        src={product_image}
+        width={1000}
+        height={1000}
+        src={product.image}
         alt="kite"
         className="md:hidden "
       />
@@ -67,12 +66,14 @@ const ProductPage: NextPage<{ id: string }> = ({ id }) => {
       <div className="w-full  py-6">
         <Container maxWidth="7xl" className=" m-auto w-full">
           <div className="w-full md:flex">
-            <Image
-              src={product_image}
-              style={{ width: "100%" }}
-              alt="kite"
-              className="hidden w-2/3 rounded-lg md:block"
-            />
+            <div className="min relative hidden h-[40rem] w-2/3  rounded-lg md:block">
+              <Image
+                src={product.image}
+                fill
+                alt="kite"
+                className="object-cover"
+              />
+            </div>
             <div className="my-auto flex w-full flex-col gap-6 md:w-2/5 md:pl-6">
               <h2 className="pb-4 text-3xl  font-medium md:text-4xl ">
                 {product.title}
