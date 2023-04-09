@@ -4,7 +4,7 @@
 import { cva, type VariantProps } from "class-variance-authority";
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-const buttonStyles = cva("font-medium text-lg  border-1", {
+export const buttonStyles = cva("font-medium text-lg  border-1", {
   variants: {
     color: {
       primary: " bg-sky-500 text-white hover:bg-sky-600  ",
