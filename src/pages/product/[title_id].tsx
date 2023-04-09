@@ -55,18 +55,14 @@ const ProductPage: NextPage<{ title_id: string }> = ({ title_id }) => {
 
   return (
     <div className="pt-16">
-      <Image
-        width={1000}
-        height={1000}
-        src={product.image}
-        alt="kite"
-        className="md:hidden "
-      />
+      <div className="min relative  h-[20rem]  rounded-lg md:hidden">
+        <Image fill src={product.image} alt="kite" className="object-cover " />
+      </div>
 
       <div className="w-full  py-6">
         <Container maxWidth="7xl" className=" m-auto w-full">
           <div className="w-full md:flex">
-            <div className="min relative hidden h-[40rem] w-2/3  rounded-lg md:block">
+            <div className="relative hidden h-[40rem] w-2/3  rounded-lg md:block">
               <Image
                 src={product.image}
                 fill

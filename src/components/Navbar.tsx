@@ -5,17 +5,9 @@ import account from "../../public/images/icons/account.svg";
 import cart from "../../public/images/icons/cart.svg";
 import Image from "next/image";
 import LinkButton from "./LinkButton";
-import { AnimatePresence, motion, stagger, useScroll } from "framer-motion";
-import {
-  ForwardRefRenderFunction,
-  Fragment,
-  forwardRef,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import { Popover, Transition } from "@headlessui/react";
-import Button from "./Button";
+import { AnimatePresence, motion, useScroll } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { Popover } from "@headlessui/react";
 
 export default function Navbar() {
   const ref = useRef<HTMLDivElement>(null);
@@ -25,11 +17,9 @@ export default function Navbar() {
   const variants = {
     scrolled: {
       backgroundColor: "#0a0d0f",
-      backdropFilter: "blur(10px)",
     },
     notScrolled: {
       backgroundColor: "#00000000",
-      backdropFilter: "blur(0px)",
     },
   };
 
