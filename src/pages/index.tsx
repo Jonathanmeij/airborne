@@ -3,9 +3,9 @@ import Head from "next/head";
 import Image, { type StaticImageData } from "next/image";
 import bg from "../../public/images/home/bg.png";
 import mobile from "../../public/images/home/mobile.jpg";
-import kite_product from "../../public/images/home/kite_product.png";
-import wetsuit_product from "../../public/images/home/wetsuit_product.png";
-import kiteboard from "../../public/images/home/kiteboard.png";
+import kite_product from "../../public/images/products/sailor-v2.png";
+import wetsuit_product from "../../public/images/products/surfshield.png";
+import kiteboard from "../../public/images/products/glide-v1.png";
 import about_us from "../../public/images/home/about_us.png";
 
 import { Button, Container } from "../components/index";

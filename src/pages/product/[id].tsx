@@ -1,34 +1,92 @@
 import { Button, Container, Divider } from "~/components";
-import kite_product from "../../../public/images/home/kite_product.png";
 import Image from "next/image";
+import { type RouterOutputs, api } from "~/utils/api";
+import { generateSSGHelper } from "~/server/helpers/ssgHelper";
+import { NextPage, type GetStaticProps } from "next";
+import { prisma } from "~/server/db";
+import { log } from "console";
 
-export default function ProductPage() {
+type Product = RouterOutputs["product"]["getProduct"];
+
+export const getStaticPaths = async () => {
+  const products = await prisma.product.findMany({
+    select: {
+      id: true,
+    },
+  });
+
+  return {
+    paths: products.map((product) => ({
+      params: {
+        id: product.id,
+      },
+    })),
+    fallback: "blocking",
+  };
+};
+
+//euro sign:
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const ssg = generateSSGHelper();
+
+  const id = context.params?.id;
+
+  if (typeof id !== "string") {
+    throw new Error("Invalid id");
+  }
+
+  await ssg.product.getProduct.prefetch({ id });
+
+  return {
+    props: {
+      trpcState: ssg.dehydrate(),
+      id,
+    },
+  };
+};
+
+const ProductPage: NextPage<{ id: string }> = ({ id }) => {
+  const { data: product } = api.product.getProduct.useQuery({ id });
+
+  if (!product) {
+    return <div className="pt-16">Product does not exist</div>;
+  }
+
+  const product_image = `../../../public${product.image}`;
+
   return (
     <div className="pt-16">
-      <Image src={kite_product} alt="kite" className="md:hidden " />
+      <Image
+        style={{ width: "100%" }}
+        src={product_image}
+        alt="kite"
+        className="md:hidden "
+      />
 
       <div className="w-full  py-6">
         <Container maxWidth="7xl" className=" m-auto w-full">
           <div className="w-full md:flex">
             <Image
-              src={kite_product}
+              src={product_image}
+              style={{ width: "100%" }}
               alt="kite"
               className="hidden w-2/3 rounded-lg md:block"
             />
             <div className="my-auto flex w-full flex-col gap-6 md:w-2/5 md:pl-6">
               <h2 className="pb-4 text-3xl  font-medium md:text-4xl ">
-                Product Name
+                {product.title}
               </h2>
-              <p className=" font-light text-gray-300">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis
-                voluptas, quod, quia, voluptates quae voluptatibus quibusdam
-              </p>
+              <p className=" font-light text-gray-300">{product.description}</p>
 
               <Divider />
               <div className="flex justify-between ">
                 <span className="flex items-center gap-3">
-                  <span className="text-xs font-light ">USD</span>
-                  <span className="text-lg font-semibold">$ 1299.99</span>
+                  <span className="text-xs font-light ">Euro</span>
+                  <span className="text-lg font-semibold">
+                    {" "}
+                    € {product.price}
+                  </span>
                 </span>
                 <Button color="primary">Add to cart</Button>
               </div>
@@ -49,16 +107,6 @@ export default function ProductPage() {
       </div>
     </div>
   );
-}
+};
 
-// <h2 className=" pb-4  text-4xl font-medium md:w-2/5">
-//               About <span className=" font-bold"> Us</span>
-//             </h2>
-//             <p className="max-w-2xl  font-light text-gray-300">
-//               We are a small team of passionate kitesurfers who love to share
-//               our passion with others. We are based in the beautiful city of
-//               Amsterdam and we are always ready to help you with any questions
-//               you might have. Feel free to contact us.We are based in the
-//               beautiful city of Amsterdam and we are always ready to help you
-//               with any questions you might have. Feel free to contact us.
-//             </p>
+export default ProductPage;
