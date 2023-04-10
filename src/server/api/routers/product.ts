@@ -28,6 +28,9 @@ export const productRouter = createTRPCRouter({
         where: {
           title_id: input.title_id,
         },
+        include: {
+          colors: true,
+        },
       });
     }),
 });

@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
+import { useController } from "react-hook-form";
 
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -46,11 +47,9 @@ export function Input({
           ...options,
         })}
         placeholder={placeholder}
-        className={`text-md block w-full max-w-md rounded-lg border  border-san-marino-200  bg-san-marino-50 p-2.5  
-                 placeholder-gray-400 focus:outline-none focus:ring-2 
-                focus:ring-san-marino-500 ${className} ${
-          fullWidth ? "w-full" : ""
-        }
+        className={`text-md border-san-marino-200 bg-san-marino-50 focus:ring-san-marino-500 block w-full  max-w-md  rounded-lg border  
+                 p-2.5 placeholder-gray-400 focus:outline-none 
+                focus:ring-2 ${className} ${fullWidth ? "w-full" : ""}
                 ${error ? "border-red-300 " : ""}
         `}
       />
@@ -84,7 +83,7 @@ export function TextArea({
           ...options,
         })}
         placeholder={placeholder}
-        className={`text-md block w-full max-w-md rounded-lg border border-san-marino-200 bg-san-marino-50  p-2.5 placeholder-gray-400   focus:outline-none focus:ring-2 focus:ring-san-marino-500 ${className} ${
+        className={`text-md border-san-marino-200 bg-san-marino-50 focus:ring-san-marino-500 block w-full max-w-md rounded-lg  border p-2.5   placeholder-gray-400 focus:outline-none focus:ring-2 ${className} ${
           fullWidth ? "w-full" : ""
         }
                 ${error ? "border-red-400 " : ""}
@@ -108,7 +107,7 @@ export function ListBox({ selected, setSelected, options }: ListBoxProps) {
       value={selected}
       onChange={setSelected}
     >
-      <Listbox.Button className="flex w-full items-center justify-between rounded-lg border border-san-marino-200  p-2.5 placeholder-gray-400 ">
+      <Listbox.Button className="border-san-marino-200 flex w-full items-center justify-between rounded-lg border  p-2.5 placeholder-gray-400 ">
         <span>{selected + 1}</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"

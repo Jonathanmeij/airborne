@@ -13,7 +13,22 @@ async function main() {
         "With the new Sailor V2, you peform at your best in any condition. The new design is made to be more durable and has lighter materials.",
       price: 1299,
       image: "/images/products/sailor-v2.png",
-      colors: ["#171717", "#f8fafc", "#ef4444", "#0ea5e9"],
+      colors: {
+        create: [
+          {
+            name: "Black",
+            color: "#000000",
+          },
+          {
+            name: "White",
+            color: "#ffffff",
+          },
+          {
+            name: "Blue",
+            color: "#0ea5e9",
+          },
+        ],
+      },
       sizes: ["6", "7", "8", "9", "10", "11", "12"],
       title_id: "sailor-v2",
     },
@@ -29,7 +44,18 @@ async function main() {
         "Stay warm and dry with the new SurfShield wetsuit. Specially designed for rough conditions. The new design is made to be more durable and has lighter materials.",
       price: 149,
       image: "/images/products/surfshield.png",
-      colors: ["#171717", "#1e293b"],
+      colors: {
+        create: [
+          {
+            name: "Black",
+            color: "#000000",
+          },
+          {
+            name: "Dark blue",
+            color: "#0ea5e9",
+          },
+        ],
+      },
       sizes: ["S", "M", "L", "XL"],
       title_id: "surfshield",
     },
@@ -45,7 +71,22 @@ async function main() {
         "The new Glide V1 is the perfect board for beginners and intermediate riders. Its easy to use. It uses the latest technology to make the board as light as possible.",
       price: 499,
       image: "/images/products/glide-v1.png",
-      colors: ["#f8fafc", "#f8fafc", "#0ea5e9"],
+      colors: {
+        create: [
+          {
+            name: "Black",
+            color: "#000000",
+          },
+          {
+            name: "White",
+            color: "#ffffff",
+          },
+          {
+            name: "Orange",
+            color: "#ff6600",
+          },
+        ],
+      },
       sizes: ["125 X 38", "133 X 40", "138 X 41", "141 X 42"],
       title_id: "glide-v1",
     },

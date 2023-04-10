@@ -1,12 +1,13 @@
 import { Button, Container, Divider } from "~/components";
 import Image from "next/image";
-import { type RouterOutputs, api } from "~/utils/api";
+import { RouterOutputs, api } from "~/utils/api";
 import { generateSSGHelper } from "~/server/helpers/ssgHelper";
-import { NextPage, type GetStaticProps } from "next";
+import { type NextPage, type GetStaticProps } from "next";
 import { prisma } from "~/server/db";
-import { log } from "console";
 import { RadioGroup } from "@headlessui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { SubmitHandler, UseFormRegister, useForm } from "react-hook-form";
+import { useRouter } from "next/router";
 
 export const getStaticPaths = async () => {
   const products = await prisma.product.findMany({
@@ -45,9 +46,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 };
 
-const ProductPage: NextPage<{ title_id: string }> = ({ title_id }) => {
-  const [color, setColor] = useState("red");
+type Product = RouterOutputs["product"]["getProductByTitle"];
 
+const ProductPage: NextPage<{ title_id: string }> = ({ title_id }) => {
   const { data: product } = api.product.getProductByTitle.useQuery({
     title_id,
   });
@@ -79,41 +80,7 @@ const ProductPage: NextPage<{ title_id: string }> = ({ title_id }) => {
               </h2>
 
               <div>
-                {/* {product.colors.map((color) => (
-                    <div
-                      key={color}
-                      className="h-8 w-8 rounded-full"
-                      style={{ backgroundColor: color }}
-                    ></div>
-                  ))} */}
-                <Radio label="color" selected={color} setSelected={setColor}>
-                  <>
-                    {product.colors.map((color) => (
-                      <RadioGroup.Option
-                        key={color}
-                        value={color}
-                        className={({ active, checked }) =>
-                          `
-                  ${
-                    checked
-                      ? " ring-2 ring-bunker-300 ring-offset-2 ring-offset-bunker-950"
-                      : ""
-                  }
-                    relative flex cursor-pointer rounded-full shadow-md   focus:outline-none`
-                        }
-                      >
-                        {({ active, checked }) => (
-                          <>
-                            <div
-                              className="h-8 w-8 rounded-full"
-                              style={{ backgroundColor: color }}
-                            ></div>
-                          </>
-                        )}
-                      </RadioGroup.Option>
-                    ))}
-                  </>
-                </Radio>
+                <ProductForm product={product} />
               </div>
 
               <Divider />
@@ -148,70 +115,107 @@ const ProductPage: NextPage<{ title_id: string }> = ({ title_id }) => {
 
 export default ProductPage;
 
-function Radio({
-  label,
-  children,
-  selected,
-  setSelected,
-}: {
-  label: string;
-  children: React.ReactNode;
-  selected: string;
-  setSelected: (value: string) => void;
-}) {
+type FormValues = {
+  color: string;
+  size: string;
+};
+
+function ProductForm({ product }: { product: Product }) {
+  const dynamicRoute = useRouter().asPath;
+
+  const { register, handleSubmit, control, resetField } = useForm<FormValues>();
+  const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data);
+
+  useEffect(() => {
+    resetField("color");
+    resetField("size");
+  }, [dynamicRoute, resetField]);
+
+  if (!product) {
+    return null;
+  }
+
   return (
-    <div className="w-full ">
-      <div className="mx-auto w-full max-w-md">
-        <RadioGroup value={selected} onChange={setSelected}>
-          <RadioGroup.Label className="">{label}</RadioGroup.Label>
-          <div className="flex gap-3 pt-3">{children}</div>
-        </RadioGroup>
+    <form onSubmit={void handleSubmit(onSubmit)}>
+      {/* <input {...register("radio")} type="radio" value="red" />
+      <input {...register("radio")} type="radio" value="blue" />
+      <input {...register("radio")} type="radio" value="black" /> */}
+
+      <h4 className="">Color</h4>
+      <div className="flex gap-3 py-3">
+        {product.colors.map((color) => (
+          <ColorRadioButton
+            key={color.id}
+            label={color.name}
+            value={color.color}
+            register={register}
+          />
+        ))}
       </div>
+      <h4 className="">Size</h4>
+      <div className="flex gap-3 py-3">
+        {product.sizes.map((size) => (
+          <RadioButton
+            key={size}
+            label={size}
+            value={size}
+            register={register}
+          />
+        ))}
+      </div>
+    </form>
+  );
+}
+
+{
+  /* <RadioButton label="red" value="red" register={register} />
+        <RadioButton label="blue" value="blue" register={register} />
+        <RadioButton label="black" value="black" register={register} /> */
+}
+
+interface RadioButtonProps {
+  label: string;
+  value: string;
+  register: UseFormRegister<FormValues>;
+}
+
+function RadioButton({ label, value, register }: RadioButtonProps) {
+  return (
+    <div>
+      <input
+        {...register("size")}
+        type="radio"
+        value={value}
+        className="peer hidden"
+        id={value}
+      />
+      <label
+        htmlFor={value}
+        className="peer-chering-offset-bunker-900 block w-max cursor-pointer select-none rounded  bg-bunker-900 
+        px-2 py-1 ring-bunker-700 peer-checked:bg-bunker-800   peer-checked:ring-2"
+      >
+        {label} m
+      </label>
     </div>
   );
 }
 
-function CheckIcon(props: React.ComponentProps<"svg">) {
+function ColorRadioButton({ value, register }: RadioButtonProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" {...props}>
-      <circle cx={12} cy={12} r={12} fill="#fff" opacity="0.2" />
-      <path
-        d="M7 13l3 3 7-7"
-        stroke="#fff"
-        strokeWidth={1.5}
-        strokeLinecap="round"
-        strokeLinejoin="round"
+    <div className="">
+      <input
+        {...register("color")}
+        type="radio"
+        value={value}
+        className="peer hidden"
+        id={value}
       />
-    </svg>
+      <label
+        htmlFor={value}
+        style={{ backgroundColor: value }}
+        className="block h-8 w-8 cursor-pointer select-none rounded-full 
+        ring-2 ring-bunker-800 ring-offset-bunker-900 peer-checked:ring-2  peer-checked:ring-bunker-300 peer-checked:ring-offset-2"
+      ></label>
+    </div>
   );
 }
-
-// {plans.map((plan) => (
-//   <RadioGroup.Option
-//     key={plan.name}
-//     value={plan}
-//     className={({ active, checked }) =>
-//       `${
-//         active
-//           ? "ring-2 ring-white ring-opacity-60 ring-offset-2 ring-offset-sky-300"
-//           : ""
-//       }
-//       ${checked ? "ring-2 ring-bunker-800" : ""}
-//         relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-none`
-//     }
-//   >
-//     {({ active, checked }) => (
-//       <>
-//         <div className="flex  items-center justify-between">
-//           <div className="flex items-center">
-//             <div className="text-sm">
-//               <RadioGroup.Label as="p" className={`font-medium  `}>
-//                 {plan.name}
-//               </RadioGroup.Label>
-//             </div>
-//           </div>
-//         </div>
-//       </>
-//     )}
-//   </RadioGroup.Option>
-// ))}
