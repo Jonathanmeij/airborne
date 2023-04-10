@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { Button, Container, Divider } from "~/components";
 import Image from "next/image";
 import { RouterOutputs, api } from "~/utils/api";
@@ -8,6 +9,8 @@ import { RadioGroup } from "@headlessui/react";
 import { useEffect, useState } from "react";
 import { SubmitHandler, UseFormRegister, useForm } from "react-hook-form";
 import { useRouter } from "next/router";
+import { on } from "stream";
+import toast from "react-hot-toast";
 
 export const getStaticPaths = async () => {
   const products = await prisma.product.findMany({
@@ -75,25 +78,11 @@ const ProductPage: NextPage<{ title_id: string }> = ({ title_id }) => {
               />
             </div>
             <div className="my-auto flex w-full flex-col gap-6 md:w-2/5 md:pl-6">
-              <h2 className=" text-3xl  font-medium md:text-4xl ">
+              <h2 className=" text-3xl font-medium md:text-4xl ">
                 {product.title}
               </h2>
 
-              <div>
-                <ProductForm product={product} />
-              </div>
-
-              <Divider />
-              <div className="flex justify-between ">
-                <span className="flex items-center gap-3">
-                  <span className="text-xs font-light ">Euro</span>
-                  <span className="text-lg font-semibold">
-                    {" "}
-                    € {product.price}
-                  </span>
-                </span>
-                <Button color="primary">Add to cart</Button>
-              </div>
+              <ProductForm product={product} />
             </div>
           </div>
         </Container>
@@ -123,8 +112,15 @@ type FormValues = {
 function ProductForm({ product }: { product: Product }) {
   const dynamicRoute = useRouter().asPath;
 
-  const { register, handleSubmit, control, resetField } = useForm<FormValues>();
-  const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data);
+  const { register, handleSubmit, resetField } = useForm<FormValues>();
+  const onSubmit = (data: FormValues) => {
+    toast.success("Added to cart.", {
+      position: "bottom-right",
+      style: {
+        borderRadius: "10px",
+      },
+    });
+  };
 
   useEffect(() => {
     resetField("color");
@@ -136,32 +132,47 @@ function ProductForm({ product }: { product: Product }) {
   }
 
   return (
-    <form onSubmit={void handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
       {/* <input {...register("radio")} type="radio" value="red" />
       <input {...register("radio")} type="radio" value="blue" />
       <input {...register("radio")} type="radio" value="black" /> */}
 
-      <h4 className="">Color</h4>
-      <div className="flex gap-3 py-3">
-        {product.colors.map((color) => (
-          <ColorRadioButton
-            key={color.id}
-            label={color.name}
-            value={color.color}
-            register={register}
-          />
-        ))}
+      <div>
+        <h4 className="">Color</h4>
+        <div className="flex gap-3 pt-3">
+          {product.colors.map((color) => (
+            <ColorRadioButton
+              key={color.id}
+              label={color.name}
+              value={color.color}
+              register={register}
+            />
+          ))}
+        </div>
       </div>
-      <h4 className="">Size</h4>
-      <div className="flex gap-3 py-3">
-        {product.sizes.map((size) => (
-          <RadioButton
-            key={size}
-            label={size}
-            value={size}
-            register={register}
-          />
-        ))}
+      <div>
+        <h4 className="">Size</h4>
+        <div className="flex gap-3 pt-3">
+          {product.sizes.map((size) => (
+            <RadioButton
+              key={size}
+              label={size}
+              value={size}
+              register={register}
+            />
+          ))}
+        </div>
+      </div>
+
+      <Divider />
+      <div className="flex justify-between ">
+        <span className="flex items-center gap-3">
+          <span className="text-xs font-light ">Euro</span>
+          <span className="text-lg font-semibold"> € {product.price}</span>
+        </span>
+        <Button type="submit" color="primary">
+          Add to cart
+        </Button>
       </div>
     </form>
   );
