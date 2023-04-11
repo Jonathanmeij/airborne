@@ -9,6 +9,8 @@ import Button from "./Button";
 import { AnimatePresence, motion, useScroll } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Popover } from "@headlessui/react";
+import { useCartContext } from "~/pages/CartProvider";
+import { log } from "console";
 
 export default function Navbar() {
   const ref = useRef<HTMLDivElement>(null);
@@ -99,7 +101,7 @@ const panelVariant = {
   },
   closed: {
     opacity: 0,
-    scale: 0.6,
+    scale: 0.7,
     transition: {
       staggerChildren: 0.05,
       staggerDirection: -1,
@@ -269,7 +271,8 @@ function MenuItem({
 }
 
 function CartMenu() {
-  const genericHamburgerLine = `h-1 w-8 my-1 rounded bg-white transition ease transform duration-300`;
+  const { cart } = useCartContext();
+  console.log(cart);
 
   return (
     <div className="">
@@ -319,79 +322,34 @@ function CartMenu() {
                   animate="open"
                   exit="closed"
                   static
-                  className=" absolute right-0 z-50 mt-6 w-screen origin-top-right transform sm:px-0 md:right-0  md:mt-3 lg:max-w-xl"
+                  className=" absolute right-0 z-50 mt-6 w-screen origin-top-right transform sm:px-0 md:right-0  md:mt-3 lg:max-w-lg"
                 >
                   <Container maxWidth="7xl" className="m-auto">
                     <div className=" overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                      <div className="relative grid gap-3 bg-white p-4 text-bunker-950 lg:grid-cols-2">
-                        <MenuItem close={close} href="/product/sailor-v2">
-                          <span className="flex items-center">
-                            <span className="text-lg font-medium text-gray-900">
-                              Sailor V2
-                            </span>
-                          </span>
-                          <span className="block text-sm text-gray-500">
-                            All around kite
-                          </span>
-                        </MenuItem>
-                        <MenuItem close={close} href="/product/surfshield">
-                          <span className="flex items-center">
-                            <span className="text-lg font-medium text-gray-900">
-                              Surfshield
-                            </span>
-                          </span>
-                          <span className="block text-sm text-gray-500">
-                            Wetsuit specially designed for rough conditions
-                          </span>
-                        </MenuItem>
-                        <MenuItem close={close} href="/product/glide-v1">
-                          <span className="text-lg font-medium text-gray-900">
-                            Glide V1
-                          </span>
-                          <span className="block text-sm text-gray-500">
-                            Easy to use and fast board
-                          </span>
-                        </MenuItem>
+                      <div className="  bg-white p-4 text-bunker-950">
+                        <span className=" text-xl font-semibold">Cart</span>
                       </div>
                       <div className="bg-gray-100 p-4">
-                        <MenuItem close={close} href="/account">
-                          <div className="flex items-center gap-3 ">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="white"
-                              width="20"
-                              height="20"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                fill="black"
-                                d="M19 7.001c0 3.865-3.134 7-7 7s-7-3.135-7-7c0-3.867 3.134-7.001 7-7.001s7 3.134 7 7.001zm-1.598 7.18c-1.506 1.137-3.374 1.82-5.402 1.82-2.03 0-3.899-.685-5.407-1.822-4.072 1.793-6.593 7.376-6.593 9.821h24c0-2.423-2.6-8.006-6.598-9.819z"
-                              />
-                            </svg>
-                            <span className="  font-medium text-gray-900">
-                              Account
+                        {cart.length === 0 && (
+                          <div className="text-center">
+                            <span className="text-bunker-600">
+                              Your cart is empty
                             </span>
                           </div>
-                        </MenuItem>
-                        <MenuItem close={close} href="/cart">
-                          <div className="flex items-center gap-3 ">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="white"
-                              width="20"
-                              height="20"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                fill="black"
-                                d="M4.558 7l4.701-4.702c.199-.198.46-.298.721-.298.613 0 1.02.505 1.02 1.029 0 .25-.092.504-.299.711l-3.26 3.26h-2.883zm12.001 0h2.883l-4.701-4.702c-.199-.198-.46-.298-.721-.298-.613 0-1.02.505-1.02 1.029 0 .25.092.504.299.711l3.26 3.26zm-16.559 2v2h.643c.534 0 1.021.304 1.256.784l4.101 10.216h12l4.102-10.214c.233-.481.722-.786 1.256-.786h.642v-2h-24z"
-                              />
-                            </svg>
-                            <span className=" font-medium text-gray-900">
-                              Cart
-                            </span>
-                          </div>
-                        </MenuItem>
+                        )}
+                      </div>
+                      <div className="flex flex-col bg-white p-4 text-bunker-950">
+                        <span>
+                          <span className="font-semibold">Subtotal:</span>
+                          <span className="float-right">$0.00</span>
+                        </span>
+                        <Button
+                          color="black"
+                          rounded="rounded"
+                          className="mt-4"
+                        >
+                          Checkout
+                        </Button>
                       </div>
                     </div>
                   </Container>
