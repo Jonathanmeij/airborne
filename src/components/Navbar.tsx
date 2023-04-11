@@ -2,15 +2,11 @@
 import Link from "next/link";
 import Container from "./Container";
 import account from "../../public/images/icons/account.svg";
-import cart from "../../public/images/icons/cart.svg";
 import Image from "next/image";
 import LinkButton from "./LinkButton";
-import Button from "./Button";
 import { AnimatePresence, motion, useScroll } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Popover } from "@headlessui/react";
-import { useCartContext } from "~/pages/CartProvider";
-import { log } from "console";
 import CartMenu from "./Cart";
 
 export default function Navbar() {
@@ -215,25 +211,6 @@ function MobileMenu() {
                             </svg>
                             <span className="  font-medium text-gray-900">
                               Account
-                            </span>
-                          </div>
-                        </MenuItem>
-                        <MenuItem close={close} href="/cart">
-                          <div className="flex items-center gap-3 ">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="white"
-                              width="20"
-                              height="20"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                fill="black"
-                                d="M4.558 7l4.701-4.702c.199-.198.46-.298.721-.298.613 0 1.02.505 1.02 1.029 0 .25-.092.504-.299.711l-3.26 3.26h-2.883zm12.001 0h2.883l-4.701-4.702c-.199-.198-.46-.298-.721-.298-.613 0-1.02.505-1.02 1.029 0 .25.092.504.299.711l3.26 3.26zm-16.559 2v2h.643c.534 0 1.021.304 1.256.784l4.101 10.216h12l4.102-10.214c.233-.481.722-.786 1.256-.786h.642v-2h-24z"
-                              />
-                            </svg>
-                            <span className=" font-medium text-gray-900">
-                              Cart
                             </span>
                           </div>
                         </MenuItem>
