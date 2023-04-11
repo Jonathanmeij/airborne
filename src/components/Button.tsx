@@ -10,8 +10,7 @@ export const buttonStyles = cva("font-medium text-lg  border-1", {
       primary: " bg-sky-500 text-white hover:bg-sky-600  ",
       secondary:
         " bg-white text-black  text-san-marino-900 hover:bg-gray-200 shadow-md",
-      secondaryDarker:
-        " border border-gray-300 text-san-marino-900 hover:bg-san-marino-100",
+      black: " bg-bunker-950 text-white hover:bg-bunker-900 ",
       none: "bg-transparent hover:bg-san-marino-50 border-0",
       danger: " bg-red-100 text-red-800 hover:bg-red-200 border-red-500",
     },
