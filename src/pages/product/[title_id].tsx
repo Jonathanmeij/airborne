@@ -1,15 +1,13 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { Button, Container, Divider } from "~/components";
 import Image from "next/image";
-import { RouterOutputs, api } from "~/utils/api";
+import { type RouterOutputs, api } from "~/utils/api";
 import { generateSSGHelper } from "~/server/helpers/ssgHelper";
 import { type NextPage, type GetStaticProps } from "next";
 import { prisma } from "~/server/db";
-import { Disclosure, RadioGroup } from "@headlessui/react";
-import React, { useEffect, useState } from "react";
-import { SubmitHandler, UseFormRegister, useForm } from "react-hook-form";
+import React, { useEffect } from "react";
+import { type UseFormRegister, useForm } from "react-hook-form";
 import { useRouter } from "next/router";
-import { on } from "stream";
 import toast from "react-hot-toast";
 import ProductDisclosure from "./ProductDisclosure";
 import { useCartContext } from "../CartProvider";
@@ -52,7 +50,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 type Product = RouterOutputs["product"]["getProductByTitle"];
-type ProductWithoutColor = RouterOutputs["product"]["getAllProducts"][0];
 
 const ProductPage: NextPage<{ title_id: string }> = ({ title_id }) => {
   const { data: product } = api.product.getProductByTitle.useQuery({
@@ -112,12 +109,22 @@ function ProductForm({ product }: { product: Product }) {
   const dynamicRoute = useRouter().asPath;
   const { addToCart } = useCartContext();
 
-  const { register, handleSubmit, resetField } = useForm<FormValues>();
+  const { register, handleSubmit, resetField, setValue } =
+    useForm<FormValues>();
 
   useEffect(() => {
     resetField("color");
     resetField("size");
-  }, [dynamicRoute, resetField]);
+    if (!product) {
+      return;
+    }
+    if (product.colors[0] !== undefined) {
+      setValue("color", product.colors[0].name);
+    }
+    if (product.sizes[0] !== undefined) {
+      setValue("size", product.sizes[0]);
+    }
+  }, [dynamicRoute, resetField, setValue, product]);
 
   if (!product) {
     return null;
@@ -203,9 +210,10 @@ interface RadioButtonProps {
   label: string;
   value: string;
   register: UseFormRegister<FormValues>;
+  checked?: boolean;
 }
 
-function RadioButton({ label, value, register }: RadioButtonProps) {
+function RadioButton({ label, value, register, checked }: RadioButtonProps) {
   return (
     <div className="w-min">
       <input
@@ -214,6 +222,7 @@ function RadioButton({ label, value, register }: RadioButtonProps) {
         value={value}
         className="peer hidden"
         id={value}
+        checked={checked}
       />
       <label
         htmlFor={value}
@@ -226,7 +235,12 @@ function RadioButton({ label, value, register }: RadioButtonProps) {
   );
 }
 
-function ColorRadioButton({ value, label, register }: RadioButtonProps) {
+function ColorRadioButton({
+  value,
+  label,
+  register,
+  checked,
+}: RadioButtonProps) {
   return (
     <div className="">
       <input
@@ -235,6 +249,7 @@ function ColorRadioButton({ value, label, register }: RadioButtonProps) {
         value={label}
         className="peer hidden"
         id={label}
+        checked={checked}
       />
       <label
         htmlFor={label}
