@@ -63,7 +63,7 @@ export default function Footer() {
       </Container>
       <div className="bg-bunker-900">
         <Container maxWidth="7xl" className="m-auto  py-3 text-center">
-          <span className=" font-light text-slate-300">
+          <span className=" text-xs font-light text-slate-300">
             © Copyright Jonathan van der Meij 2023 - All Rights Reserved
           </span>
         </Container>
