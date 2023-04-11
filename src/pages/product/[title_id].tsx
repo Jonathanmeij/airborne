@@ -202,7 +202,7 @@ function RadioButton({ label, value, register }: RadioButtonProps) {
         className="peer-chering-offset-bunker-900 block w-max cursor-pointer select-none rounded  bg-bunker-900 
         px-2 py-1 ring-bunker-700 peer-checked:bg-bunker-800   peer-checked:ring-2"
       >
-        {label} m
+        {label}
       </label>
     </div>
   );
