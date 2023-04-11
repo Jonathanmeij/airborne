@@ -12,6 +12,7 @@ import { useRouter } from "next/router";
 import { on } from "stream";
 import toast from "react-hot-toast";
 import ProductDisclosure from "./ProductDisclosure";
+import { useCartContext } from "../CartProvider";
 
 export const getStaticPaths = async () => {
   const products = await prisma.product.findMany({
@@ -51,6 +52,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 type Product = RouterOutputs["product"]["getProductByTitle"];
+type ProductWithoutColor = RouterOutputs["product"]["getAllProducts"][0];
 
 const ProductPage: NextPage<{ title_id: string }> = ({ title_id }) => {
   const { data: product } = api.product.getProductByTitle.useQuery({
@@ -108,16 +110,9 @@ type FormValues = {
 
 function ProductForm({ product }: { product: Product }) {
   const dynamicRoute = useRouter().asPath;
+  const { addToCart } = useCartContext();
 
   const { register, handleSubmit, resetField } = useForm<FormValues>();
-  const onSubmit = (data: FormValues) => {
-    toast.success("Added to cart.", {
-      position: "bottom-right",
-      style: {
-        borderRadius: "10px",
-      },
-    });
-  };
 
   useEffect(() => {
     resetField("color");
@@ -127,6 +122,29 @@ function ProductForm({ product }: { product: Product }) {
   if (!product) {
     return null;
   }
+
+  const productNoColor = {
+    id: product.id,
+    title: product.title,
+    title_id: product.title_id,
+    description: product.description,
+    price: product.price,
+    image: product.image,
+    sizes: product.sizes,
+    createdAt: product.createdAt,
+    updatedAt: product.updatedAt,
+  };
+
+  const onSubmit = (data: FormValues) => {
+    addToCart(productNoColor, data.size, data.color, 1);
+
+    toast.success("Added to cart.", {
+      position: "bottom-right",
+      style: {
+        borderRadius: "10px",
+      },
+    });
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
