@@ -5,12 +5,13 @@ import { RouterOutputs, api } from "~/utils/api";
 import { generateSSGHelper } from "~/server/helpers/ssgHelper";
 import { type NextPage, type GetStaticProps } from "next";
 import { prisma } from "~/server/db";
-import { RadioGroup } from "@headlessui/react";
-import { useEffect, useState } from "react";
+import { Disclosure, RadioGroup } from "@headlessui/react";
+import React, { useEffect, useState } from "react";
 import { SubmitHandler, UseFormRegister, useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { on } from "stream";
 import toast from "react-hot-toast";
+import ProductDisclosure from "./ProductDisclosure";
 
 export const getStaticPaths = async () => {
   const products = await prisma.product.findMany({
@@ -89,13 +90,9 @@ const ProductPage: NextPage<{ title_id: string }> = ({ title_id }) => {
       </div>
       <div className="bg-bunker-900 py-6">
         <Container maxWidth="7xl" className=" m-auto h-screen w-full">
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt
-            debitis numquam tenetur dolores ut est fuga ducimus magnam,
-            repudiandae laborum mollitia nostrum doloribus quaerat consequuntur
-            facilis velit, ipsa sit cumque perferendis! Rerum dolores quis
-            perferendis sit ex asperiores aliquam cumque!
-          </p>
+          <ProductDisclosure title="Description">
+            {product.description}
+          </ProductDisclosure>
         </Container>
       </div>
     </div>
@@ -152,7 +149,7 @@ function ProductForm({ product }: { product: Product }) {
       </div>
       <div>
         <h4 className="">Size</h4>
-        <div className="flex gap-3 pt-3">
+        <div className=" flex  flex-wrap gap-3 pt-3">
           {product.sizes.map((size) => (
             <RadioButton
               key={size}
@@ -192,7 +189,7 @@ interface RadioButtonProps {
 
 function RadioButton({ label, value, register }: RadioButtonProps) {
   return (
-    <div>
+    <div className="w-min">
       <input
         {...register("size")}
         type="radio"

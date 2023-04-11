@@ -49,7 +49,7 @@ export default function Navbar() {
             <Link href="/">AIRBORNE</Link>
           </h1>
 
-          <div className="flex items-center gap-3 md:hidden">
+          <div className="flex items-center gap-6 md:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="white"
