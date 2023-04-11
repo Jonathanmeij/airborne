@@ -28,9 +28,7 @@ export function DeleteModal({
         <p className="text-md ">Are you sure you want to delete {item}?</p>
       </ModalBody>
       <ModalFooter>
-        <Button color="secondaryDarker" onClick={() => setIsOpen(false)}>
-          Cancel
-        </Button>
+        <Button onClick={() => setIsOpen(false)}>Cancel</Button>
         <Button color="danger" onClick={handleDelete}>
           Delete
         </Button>
