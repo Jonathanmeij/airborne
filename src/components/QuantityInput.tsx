@@ -18,12 +18,9 @@ export default function QuantityInput({ value, onChange }: QuantityInputProps) {
       >
         -
       </button>
-      <input
-        type="text"
-        className="flex h-8 w-8 items-center justify-center border-b border-t border-gray-300 bg-white text-center text-gray-500"
-        value={value}
-        onChange={(e) => onChange(parseInt(e.target.value))}
-      />
+      <div className="flex h-8 w-8 items-center justify-center border-b border-t border-gray-300 bg-white text-center text-gray-500">
+        {value}
+      </div>
       <button
         className="flex h-8 w-8 items-center justify-center rounded-r-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-50"
         onClick={() => onChange(value + 1)}
