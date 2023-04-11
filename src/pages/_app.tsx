@@ -1,6 +1,5 @@
 import { type AppType } from "next/app";
 import { type Session } from "next-auth";
-import { SessionProvider } from "next-auth/react";
 
 import { api } from "~/utils/api";
 
@@ -9,13 +8,23 @@ import Navbar from "~/components/Navbar";
 import Head from "next/head";
 import CartProvider from "./CartProvider";
 import { Toaster } from "react-hot-toast";
+import { ClerkProvider } from "@clerk/nextjs";
+import { dark } from "@clerk/themes";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
-  pageProps: { session, ...pageProps },
+  pageProps: { ...pageProps },
 }) => {
   return (
-    <SessionProvider session={session}>
+    <ClerkProvider
+      appearance={{
+        baseTheme: dark,
+        variables: {
+          colorPrimary: "#0284c7",
+          fontFamily: "Inter, sans-serif",
+        },
+      }}
+    >
       <CartProvider>
         <Toaster />
         <Navbar />
@@ -26,7 +35,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
         </Head>
         <Component {...pageProps} />
       </CartProvider>
-    </SessionProvider>
+    </ClerkProvider>
   );
 };
 

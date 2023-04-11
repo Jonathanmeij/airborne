@@ -8,11 +8,13 @@ import { AnimatePresence, motion, useScroll } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Popover } from "@headlessui/react";
 import CartMenu from "./Cart";
+import { SignInButton, useUser } from "@clerk/nextjs";
 
 export default function Navbar() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll();
   const [hasScrolled, setHasScrolled] = useState(false);
+  const { isSignedIn } = useUser();
 
   const variants = {
     scrolled: {
@@ -72,7 +74,7 @@ export default function Navbar() {
               className="flex items-center"
               padding="none"
               font="normal"
-              to="/account"
+              to={isSignedIn ? "/account" : "/sign-in"}
             >
               <li className="flex gap-3">
                 <Image src={account} alt="" />
@@ -196,7 +198,7 @@ function MobileMenu() {
                       </div>
                       <div className="bg-gray-100 p-4">
                         <MenuItem close={close} href="/account">
-                          <div className="flex items-center gap-3 ">
+                          {/* <div className="flex items-center gap-3 ">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               fill="white"
@@ -212,8 +214,9 @@ function MobileMenu() {
                             <span className="  font-medium text-gray-900">
                               Account
                             </span>
-                          </div>
+                          </div> */}
                         </MenuItem>
+                        <SignInButton />
                       </div>
                     </div>
                   </Container>
