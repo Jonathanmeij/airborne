@@ -5,7 +5,6 @@ import Container from "./Container";
 import Button from "./Button";
 import { panelVariant } from "./Navbar";
 import Image from "next/image";
-import Divider from "./Divider";
 import QuantityInput from "./QuantityInput";
 
 export default function CartMenu() {
@@ -76,8 +75,8 @@ export default function CartMenu() {
                       </div>
                       <div className="flex flex-col  divide-y bg-gray-100 px-3 text-bunker-950">
                         {cart.length === 0 && (
-                          <div className="text-center">
-                            <span className="text-bunker-600">
+                          <div className="p-3 text-center">
+                            <span className=" text-bunker-600">
                               Your cart is empty
                             </span>
                           </div>
