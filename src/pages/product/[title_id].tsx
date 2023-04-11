@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import ProductDisclosure from "./ProductDisclosure";
 import { useCartContext } from "../CartProvider";
+import Footer from "~/components/Footer";
 
 export const getStaticPaths = async () => {
   const products = await prisma.product.findMany({
@@ -61,40 +62,48 @@ const ProductPage: NextPage<{ title_id: string }> = ({ title_id }) => {
   }
 
   return (
-    <div className="pt-16">
-      <div className="min relative  h-[20rem]  rounded-lg md:hidden">
-        <Image fill src={product.image} alt="kite" className="object-cover " />
-      </div>
+    <>
+      <div className="pt-16">
+        <div className="min relative  h-[20rem]  rounded-lg md:hidden">
+          <Image
+            fill
+            src={product.image}
+            alt="kite"
+            className="object-cover "
+          />
+        </div>
 
-      <div className="w-full  py-6">
-        <Container maxWidth="7xl" className=" m-auto w-full">
-          <div className="w-full md:flex">
-            <div className="relative hidden h-[40rem] w-2/3  rounded-lg md:block">
-              <Image
-                src={product.image}
-                fill
-                alt="kite"
-                className="object-cover"
-              />
-            </div>
-            <div className="my-auto flex w-full flex-col gap-6 md:w-2/5 md:pl-6">
-              <h2 className=" text-3xl font-medium md:text-4xl ">
-                {product.title}
-              </h2>
+        <div className="w-full  py-6">
+          <Container maxWidth="7xl" className=" m-auto w-full">
+            <div className="w-full md:flex">
+              <div className="relative hidden h-[40rem] w-2/3  rounded-lg md:block">
+                <Image
+                  src={product.image}
+                  fill
+                  alt="kite"
+                  className="object-cover"
+                />
+              </div>
+              <div className="my-auto flex w-full flex-col gap-6 md:w-2/5 md:pl-6">
+                <h2 className=" text-3xl font-medium md:text-4xl ">
+                  {product.title}
+                </h2>
 
-              <ProductForm product={product} />
+                <ProductForm product={product} />
+              </div>
             </div>
-          </div>
-        </Container>
+          </Container>
+        </div>
+        <div className="bg-bunker-900 py-6">
+          <Container maxWidth="7xl" className=" m-auto h-screen w-full">
+            <ProductDisclosure title="Description">
+              {product.description}
+            </ProductDisclosure>
+          </Container>
+        </div>
       </div>
-      <div className="bg-bunker-900 py-6">
-        <Container maxWidth="7xl" className=" m-auto h-screen w-full">
-          <ProductDisclosure title="Description">
-            {product.description}
-          </ProductDisclosure>
-        </Container>
-      </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 
