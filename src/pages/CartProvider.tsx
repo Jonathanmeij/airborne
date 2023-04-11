@@ -1,7 +1,7 @@
 import { type Product } from "@prisma/client";
 import { createContext, useContext, useState } from "react";
 
-interface CartItem {
+export interface CartItem {
   id: string;
   Product: Product;
   color: string;

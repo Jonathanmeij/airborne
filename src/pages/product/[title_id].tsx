@@ -136,7 +136,7 @@ function ProductForm({ product }: { product: Product }) {
   };
 
   const onSubmit = (data: FormValues) => {
-    addToCart(productNoColor, data.size, data.color, 1);
+    addToCart(productNoColor, data.color, data.size, 1);
 
     toast.success("Added to cart.", {
       position: "bottom-right",
@@ -226,18 +226,18 @@ function RadioButton({ label, value, register }: RadioButtonProps) {
   );
 }
 
-function ColorRadioButton({ value, register }: RadioButtonProps) {
+function ColorRadioButton({ value, label, register }: RadioButtonProps) {
   return (
     <div className="">
       <input
         {...register("color")}
         type="radio"
-        value={value}
+        value={label}
         className="peer hidden"
-        id={value}
+        id={label}
       />
       <label
-        htmlFor={value}
+        htmlFor={label}
         style={{ backgroundColor: value }}
         className="block h-8 w-8 cursor-pointer select-none rounded-full 
         ring-2 ring-bunker-800 ring-offset-bunker-900 peer-checked:ring-2  peer-checked:ring-bunker-300 peer-checked:ring-offset-2"

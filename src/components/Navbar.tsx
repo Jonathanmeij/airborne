@@ -11,6 +11,7 @@ import { useEffect, useRef, useState } from "react";
 import { Popover } from "@headlessui/react";
 import { useCartContext } from "~/pages/CartProvider";
 import { log } from "console";
+import CartMenu from "./Cart";
 
 export default function Navbar() {
   const ref = useRef<HTMLDivElement>(null);
@@ -89,7 +90,7 @@ export default function Navbar() {
   );
 }
 
-const panelVariant = {
+export const panelVariant = {
   open: {
     opacity: 1,
     scale: 1,
@@ -110,7 +111,7 @@ const panelVariant = {
   },
 };
 
-const itemVariant = {
+export const itemVariant = {
   open: {
     opacity: 1,
     scale: 1,
@@ -267,98 +268,5 @@ function MenuItem({
         <span className="flex-row items-center">{children}</span>
       </motion.div>
     </Link>
-  );
-}
-
-function CartMenu() {
-  const { cart } = useCartContext();
-  console.log(cart);
-
-  return (
-    <div className="">
-      <Popover className="h-full">
-        {({ open, close }) => (
-          <>
-            <Popover.Button
-              as="div"
-              className={`
-                 h-full focus:outline-none md:flex md:items-center `}
-            >
-              <div className=" md:hidden">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="white"
-                  width="26"
-                  height="26"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="white"
-                    d="M4.558 7l4.701-4.702c.199-.198.46-.298.721-.298.613 0 1.02.505 1.02 1.029 0 .25-.092.504-.299.711l-3.26 3.26h-2.883zm12.001 0h2.883l-4.701-4.702c-.199-.198-.46-.298-.721-.298-.613 0-1.02.505-1.02 1.029 0 .25.092.504.299.711l3.26 3.26zm-16.559 2v2h.643c.534 0 1.021.304 1.256.784l4.101 10.216h12l4.102-10.214c.233-.481.722-.786 1.256-.786h.642v-2h-24z"
-                  />
-                </svg>
-              </div>
-              <div className="my-auto hidden md:block">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="white"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="white"
-                    d="M4.558 7l4.701-4.702c.199-.198.46-.298.721-.298.613 0 1.02.505 1.02 1.029 0 .25-.092.504-.299.711l-3.26 3.26h-2.883zm12.001 0h2.883l-4.701-4.702c-.199-.198-.46-.298-.721-.298-.613 0-1.02.505-1.02 1.029 0 .25.092.504.299.711l3.26 3.26zm-16.559 2v2h.643c.534 0 1.021.304 1.256.784l4.101 10.216h12l4.102-10.214c.233-.481.722-.786 1.256-.786h.642v-2h-24z"
-                  />
-                </svg>
-              </div>
-            </Popover.Button>
-            <AnimatePresence>
-              {open && (
-                <Popover.Panel
-                  as={motion.div}
-                  variants={panelVariant}
-                  initial="closed"
-                  animate="open"
-                  exit="closed"
-                  static
-                  className=" absolute right-0 z-50 mt-6 w-screen origin-top-right transform sm:px-0 md:right-0  md:mt-3 lg:max-w-lg"
-                >
-                  <Container maxWidth="7xl" className="m-auto">
-                    <div className=" overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                      <div className="  bg-white p-4 text-bunker-950">
-                        <span className=" text-xl font-semibold">Cart</span>
-                      </div>
-                      <div className="bg-gray-100 p-4">
-                        {cart.length === 0 && (
-                          <div className="text-center">
-                            <span className="text-bunker-600">
-                              Your cart is empty
-                            </span>
-                          </div>
-                        )}
-                      </div>
-                      <div className="flex flex-col bg-white p-4 text-bunker-950">
-                        <span>
-                          <span className="font-semibold">Subtotal:</span>
-                          <span className="float-right">$0.00</span>
-                        </span>
-                        <Button
-                          color="black"
-                          rounded="rounded"
-                          className="mt-4"
-                        >
-                          Checkout
-                        </Button>
-                      </div>
-                    </div>
-                  </Container>
-                </Popover.Panel>
-              )}
-            </AnimatePresence>
-          </>
-        )}
-      </Popover>
-    </div>
   );
 }

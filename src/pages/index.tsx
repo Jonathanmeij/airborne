@@ -236,7 +236,7 @@ function GridElement({
 
 function AboutUsSection() {
   return (
-    <div className="relative h-max w-full bg-bunker-900 md:h-screen">
+    <div className="relative h-max w-full bg-neutral-900 md:h-screen">
       <Container maxWidth="7xl" className="m-auto md:h-screen">
         <div className=" md:max-w-8xl mx-auto h-full w-full md:flex md:items-center">
           <Image
