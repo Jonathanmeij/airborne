@@ -35,8 +35,6 @@ export default function CartPage() {
 }
 
 function Information() {
-  const router = useRouter();
-
   return (
     <div className="flex flex-col">
       <h2 className=" text-xl font-medium">
