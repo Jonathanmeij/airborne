@@ -78,6 +78,7 @@ const Home: NextPage = () => {
               </p>
               <Button
                 color="primary"
+                font="semibold"
                 padding="wide"
                 className=" self-start md:mx-0"
               >

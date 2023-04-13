@@ -198,7 +198,7 @@ function MobileMenu() {
                       </div>
                       <div className="bg-gray-100 p-4">
                         <MenuItem close={close} href="/account">
-                          {/* <div className="flex items-center gap-3 ">
+                          <div className="flex items-center gap-3 ">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               fill="white"
@@ -214,9 +214,8 @@ function MobileMenu() {
                             <span className="  font-medium text-gray-900">
                               Account
                             </span>
-                          </div> */}
+                          </div>
                         </MenuItem>
-                        <SignInButton />
                       </div>
                     </div>
                   </Container>
