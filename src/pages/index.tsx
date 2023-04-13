@@ -133,49 +133,49 @@ function KitesSection() {
         </motion.div>
         <div className=" mb-12 grid w-full grid-cols-1 gap-6 ">
           <GridElement key="1" image={kite_product}>
-            <h3 className=" text-2xl font-semibold">Sailor V2</h3>
-            <p className="max-w-sm">
+            <h3 className=" text-3xl font-semibold">Sailor V2</h3>
+            {/* <p className="max-w-sm">
               With the new Sailor V2, you peform at your best in any condition.
-            </p>
+            </p> */}
             <div>
               <LinkButton
                 to="/product/sailor-v2"
                 rounded="rounded"
                 color="secondary"
               >
-                Shop Now
+                View product
               </LinkButton>
             </div>
           </GridElement>
           <GridElement key="2" image={wetsuit_product}>
-            <h3 className=" text-2xl font-semibold">SurfShield</h3>
-            <p className="max-w-sm">
+            <h3 className=" text-3xl font-semibold">SurfShield</h3>
+            {/* <p className="max-w-sm">
               Stay warm and dry with the new SurfShield wetsuit. Specially
               designed for rough conditions.
-            </p>
+            </p> */}
             <div>
               <LinkButton
                 to="/product/surfshield"
                 rounded="rounded"
                 color="secondary"
               >
-                Shop Now
+                View product
               </LinkButton>
             </div>
           </GridElement>
           <GridElement key="3" image={kiteboard}>
-            <h3 className=" text-2xl font-semibold">Glide V1</h3>
-            <p className="max-w-sm">
+            <h3 className=" text-3xl font-semibold">Glide V1</h3>
+            {/* <p className="max-w-sm">
               The new Glide V1 is the perfect board for beginners and
               intermediate riders. Its easy to use.
-            </p>
+            </p> */}
             <div>
               <LinkButton
                 to="/product/glide-v1"
                 rounded="rounded"
                 color="secondary"
               >
-                Shop Now
+                View product
               </LinkButton>
             </div>
           </GridElement>
@@ -199,7 +199,7 @@ function GridElement({
   });
 
   const scale = useTransform(scrollYProgress, [0, 0.9], [0.8, 1]);
-  const bgOpacity = useTransform(scrollYProgress, [0, 0.9], [0, 0.7]);
+  const bgOpacity = useTransform(scrollYProgress, [0, 0.9], [0, 0.2]);
   const textOpacity = useTransform(scrollYProgress, [0, 0.5, 0.9], [0, 0, 1]);
 
   return (
@@ -208,10 +208,8 @@ function GridElement({
       ref={ref}
       className="relative h-[70vh] overflow-hidden rounded-lg bg-gray-800 "
     >
-      <motion.div
-        style={{ opacity: bgOpacity }}
-        className=" absolute top-0 z-10 h-full w-full bg-gray-950 opacity-50"
-      />
+      <div className=" absolute top-0 z-10 h-full w-full bg-gray-950 opacity-10" />
+      <div className=" absolute top-0 z-10 h-full w-full bg-gradient-to-t from-black opacity-80" />
       <Image
         src={image}
         alt="kite"
@@ -223,7 +221,7 @@ function GridElement({
       >
         <Container
           maxWidth="7xl"
-          className="m-auto flex h-full w-full flex-col justify-center gap-4"
+          className="m-auto flex h-full w-full flex-col items-center justify-end gap-6 pb-6"
         >
           {children}
         </Container>
