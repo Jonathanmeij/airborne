@@ -34,11 +34,7 @@ export default function CartPage() {
   );
 }
 
-interface PageProps {
-  page: Page;
-}
-
-function Information({}: PageProps) {
+function Information() {
   const router = useRouter();
 
   return (
@@ -51,7 +47,7 @@ function Information({}: PageProps) {
   );
 }
 
-function Payment({}: PageProps) {
+function Payment() {
   return (
     <h2 className=" text-xl font-medium">
       payment <span className=" font-bold"> information</span>
