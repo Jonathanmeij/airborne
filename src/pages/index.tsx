@@ -234,15 +234,15 @@ function GridElement({
 
 function AboutUsSection() {
   return (
-    <div className="relative h-max w-full bg-neutral-900 md:h-screen">
+    <div className="relative h-max w-full bg-bunker-900 md:h-screen">
       <Container maxWidth="7xl" className="m-auto md:h-screen">
         <div className=" md:max-w-8xl mx-auto h-full w-full md:flex md:items-center">
           <Image
             src={about_us}
             alt="group picture on beach"
-            className="hp w-full rounded object-cover md:h-2/3 md:w-3/5 "
+            className="hp w-full rounded object-cover pt-4 md:h-2/3 md:w-3/5 md:pt-0 "
           />
-          <div className="py-12 md:ml-6 md:rounded md:py-0">
+          <div className="py-4 md:ml-6 md:rounded md:py-0">
             <h2 className=" pb-4  text-4xl font-medium md:w-2/5">
               About <span className=" font-bold"> Us</span>
             </h2>
