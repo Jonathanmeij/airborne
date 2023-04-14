@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import { Button, Container, Divider } from "~/components";
+import { Button, Container, Divider } from "~/components/ui";
 import Image from "next/image";
 import { type RouterOutputs, api } from "~/utils/api";
 import { generateSSGHelper } from "~/server/helpers/ssgHelper";

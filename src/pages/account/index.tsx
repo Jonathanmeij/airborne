@@ -1,6 +1,6 @@
 import { SignOutButton, UserProfile, useClerk } from "@clerk/nextjs";
 import { useRouter } from "next/router";
-import { Button, Container } from "~/components";
+import { Button, Container } from "~/components/ui";
 
 export default function AccountPage() {
   const { signOut } = useClerk();

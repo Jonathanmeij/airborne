@@ -1,5 +1,5 @@
 import { SignIn } from "@clerk/nextjs";
-import { Container } from "~/components";
+import { Container } from "~/components/ui";
 
 export default function SignInPage() {
   return (

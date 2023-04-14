@@ -8,7 +8,7 @@ import wetsuit_product from "../../public/images/products/surfshield.png";
 import kiteboard from "../../public/images/products/glide-v1.png";
 import about_us from "../../public/images/home/about_us.png";
 
-import { Button, Container, LinkButton } from "../components/index";
+import { Button, Container, LinkButton } from "~/components/ui";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Footer from "~/components/Footer";
