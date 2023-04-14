@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import Link from "next/link";
-import Container from "./Container";
+import Container from "./ui/Container";
 import account from "../../public/images/icons/account.svg";
 import Image from "next/image";
-import LinkButton from "./LinkButton";
+import LinkButton from "./ui/LinkButton";
 import { AnimatePresence, motion, useScroll } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Popover } from "@headlessui/react";

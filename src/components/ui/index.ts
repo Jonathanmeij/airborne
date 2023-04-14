@@ -6,6 +6,7 @@ import Button from "./Button";
 import { Input, ListBox, TextArea } from "./Input";
 import { Modal, ModalBody, ModalFooter, ModalHeader } from "./Modal";
 import Container from "./Container";
+import { ResizablePanel } from "./ResiziblePanel";
 
 export {
   Divider,
@@ -21,4 +22,5 @@ export {
   ModalFooter,
   ModalHeader,
   Container,
+  ResizablePanel,
 };

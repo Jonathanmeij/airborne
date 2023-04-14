@@ -1,11 +1,11 @@
 import { Popover } from "@headlessui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { CartItem, useCartContext } from "~/pages/CartProvider";
-import Container from "./Container";
-import Button from "./Button";
+import Container from "./ui/Container";
 import { panelVariant } from "./Navbar";
 import Image from "next/image";
 import QuantityInput from "./QuantityInput";
+import { LinkButton } from "./ui";
 
 export default function CartMenu() {
   const { cart } = useCartContext();
@@ -90,13 +90,14 @@ export default function CartMenu() {
                             € {calculateTotal()}
                           </span>
                         </span>
-                        <Button
+                        <LinkButton
                           color="black"
                           rounded="rounded"
                           className="mt-3"
+                          to="/cart"
                         >
                           Checkout
-                        </Button>
+                        </LinkButton>
                       </div>
                     </div>
                   </Container>

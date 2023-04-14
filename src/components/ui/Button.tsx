@@ -4,12 +4,13 @@
 import { cva, type VariantProps } from "class-variance-authority";
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-export const buttonStyles = cva("font-medium text-lg  border-1", {
+export const buttonStyles = cva("font-medium  border-1", {
   variants: {
     color: {
       primary: " bg-sky-500 text-white hover:bg-sky-600  ",
       secondary:
         " bg-white text-black  text-san-marino-900 hover:bg-gray-200 shadow-md",
+      secondaryDark: " bg-bunker-800 text-white hover:bg-bunker-700 ",
       black: " bg-bunker-950 text-white hover:bg-bunker-900 ",
       none: "bg-transparent hover:bg-san-marino-50 border-0",
       danger: " bg-red-100 text-red-800 hover:bg-red-200 border-red-500",
@@ -23,6 +24,12 @@ export const buttonStyles = cva("font-medium text-lg  border-1", {
     fullWidth: {
       true: "w-full",
       false: "w-auto",
+    },
+    textSize: {
+      normal: "text-base",
+      small: "text-sm",
+      large: "text-lg",
+      medium: "text-md",
     },
     rounded: {
       rounded: "rounded",
@@ -54,6 +61,7 @@ export const buttonStyles = cva("font-medium text-lg  border-1", {
     animate: false,
     font: "medium",
     textAlign: "center",
+    textSize: "normal",
   },
 });
 
@@ -79,6 +87,7 @@ function Button({
   animate,
   font,
   textAlign,
+  textSize,
 }: ButtonProps) {
   return (
     <button
@@ -90,6 +99,7 @@ function Button({
         animate,
         font,
         textAlign,
+        textSize,
       })} ${className ?? ""}`}
       onClick={onClick}
       type={type}
