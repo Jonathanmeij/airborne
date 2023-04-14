@@ -1,30 +1,36 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
-import { ChangeEvent, useEffect, useState } from "react";
-import { Button, Container } from "~/components";
+import { Button, Container, LinkButton, ResizablePanel } from "~/components/ui";
 
 type Page = "information" | "payment" | "summary";
 
 export default function CartPage() {
-  const { query } = useRouter();
+  const { query, back } = useRouter();
 
   const isPaymentSelected = !!query.payment;
-  const isSummarySelected = !!query.summary;
-  const isInformationSelected = !isPaymentSelected && !isSummarySelected;
-
-  console.log({ isPaymentSelected, isSummarySelected, isInformationSelected });
+  const isShippingSelected = !!query.shipping;
+  const isInformationSelected = !isPaymentSelected && !isShippingSelected;
+  //set id to current page
+  const id = isInformationSelected
+    ? "information"
+    : isShippingSelected
+    ? "shipping"
+    : "payment";
+  console.log(id);
 
   return (
-    <div className="h-screen">
+    <div className="h-screen pt-16">
       <Container
         maxWidth="7xl"
-        className="relative m-auto flex flex-col-reverse gap-6 pt-16 md:flex-row"
+        className="relative m-auto flex h-full flex-col-reverse justify-end gap-6  pt-6 lg:flex-row"
       >
-        <div className="h-96 rounded  border border-bunker-900 p-3 md:w-7/12 md:p-6">
-          {isInformationSelected && <Information />}
-          {isPaymentSelected && <Payment />}
+        <div className="h-max w-full rounded border border-bunker-900 bg-bunker-900 p-3 lg:w-7/12 lg:p-6">
+          <ResizablePanel id={id}>
+            {isInformationSelected && <Information back={back} />}
+            {isShippingSelected && <Shiping back={back} />}
+            {isPaymentSelected && <Payment back={back} />}
+          </ResizablePanel>
         </div>
-        <div className="h-96 rounded border border-bunker-900 p-3 md:w-5/12 md:p-6">
+        <div className="h-96 rounded border border-bunker-900 bg-bunker-900 p-3 lg:w-5/12 lg:p-6">
           <h2 className=" text-xl font-medium">
             Your <span className=" font-bold"> order</span>
           </h2>
@@ -34,21 +40,69 @@ export default function CartPage() {
   );
 }
 
-function Information() {
+interface Panel {
+  back: () => void;
+}
+
+function Information({ back }: Panel) {
   return (
-    <div className="flex flex-col">
-      <h2 className=" text-xl font-medium">
-        personal <span className=" font-bold"> information</span>
+    <div className="flex w-full flex-col gap-3">
+      <h2 className=" text-xl font-normal">
+        personal <span className=" font-semibold"> information</span>
       </h2>
-      <Link href="/cart?payment=true">payment</Link>
+      <div className="flex flex-row justify-end">
+        <LinkButton color="primary" to="/cart?shipping=true">
+          Shipping
+        </LinkButton>
+      </div>
     </div>
   );
 }
 
-function Payment() {
+function Shiping({ back }: Panel) {
+  console.log("shipping");
+
   return (
-    <h2 className=" text-xl font-medium">
-      payment <span className=" font-bold"> information</span>
-    </h2>
+    <div className="flex flex-col gap-3">
+      <h2 className=" text-xl font-normal">
+        shiping <span className=" font-semibold"> information</span>
+      </h2>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci,
+        harum?
+      </p>
+      <div className="flex flex-row justify-between">
+        <Button onClick={back} rounded="rounded" color="secondaryDark">
+          Back
+        </Button>
+        <LinkButton color="primary" to="/cart?payment=true">
+          Payment
+        </LinkButton>
+      </div>
+    </div>
+  );
+}
+
+function Payment({ back }: Panel) {
+  return (
+    <div className="flex flex-col gap-3">
+      <h2 className=" text-xl font-normal">
+        payment <span className=" font-semibold"> information</span>
+      </h2>
+      <p>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur
+        cum corporis voluptas voluptatum ut voluptatibus labore molestias
+        architecto ducimus nesciunt dolor eos, blanditiis fuga cupiditate iste!
+        Sunt sint tempore iusto!
+      </p>
+      <div className="flex flex-row justify-between">
+        <Button onClick={back} rounded="rounded" color="secondaryDark">
+          Back
+        </Button>
+        <LinkButton color="primary" to="/cart?summary=true">
+          Summary
+        </LinkButton>
+      </div>
+    </div>
   );
 }
