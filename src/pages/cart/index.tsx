@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
+
 import { useRouter } from "next/router";
 import { type ParsedUrlQuery } from "querystring";
 import {
@@ -5,7 +7,15 @@ import {
   type UseFormRegister,
   useForm,
 } from "react-hook-form";
-import { Button, Container, LinkButton, ResizablePanel } from "~/components/ui";
+import {
+  Button,
+  Container,
+  Input,
+  LinkButton,
+  ResizablePanel,
+} from "~/components/ui";
+import DisclosurePanel from "~/components/ui/Disclosure";
+import { FormInput } from "~/components/ui/FormInput";
 
 // type Page = "information" | "payment" | "summary";
 
@@ -23,18 +33,26 @@ export default function CartPage() {
         maxWidth="7xl"
         className="relative m-auto flex h-full flex-col-reverse justify-end gap-6  pt-6 lg:flex-row"
       >
-        <div className="h-max w-full rounded border border-bunker-900 bg-bunker-900 p-3 lg:w-7/12 lg:p-6">
-          <ResizablePanel id={id}>
-            {id === "information" && <Information back={back} />}
-            {id === "shipping" && <Shiping back={back} />}
-            {id === "payment" && <Payment back={back} />}
-          </ResizablePanel>
+        <div className="h-max w-full rounded border border-bunker-800 bg-bunker-900 p-3 lg:w-7/12 lg:p-6">
+          <Container maxWidth="2xl" className="m-auto">
+            <ResizablePanel id={id}>
+              {id === "information" && <Information back={back} />}
+              {id === "shipping" && <Shiping back={back} />}
+              {id === "payment" && <Payment back={back} />}
+            </ResizablePanel>
+          </Container>
         </div>
-        <div className="h-96 rounded border border-bunker-900 bg-bunker-900 p-3 lg:w-5/12 lg:p-6">
+        <div className="hidden h-96 rounded border border-bunker-800 bg-bunker-900 p-3 lg:block lg:w-5/12 lg:p-6">
           <h2 className=" text-xl font-medium">
             Your <span className=" font-bold"> order</span>
           </h2>
         </div>
+        <DisclosurePanel title="Your order" className="lg:hidden">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci,
+            harum?
+          </p>
+        </DisclosurePanel>
       </Container>
     </div>
   );
@@ -62,7 +80,19 @@ type InformationForm = {
 };
 
 function Information({}: Panel) {
-  const { register, handleSubmit } = useForm<InformationForm>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    getValues,
+  } = useForm<InformationForm>();
+  const router = useRouter();
+
+  const onSubmit = (data: InformationForm) => {
+    console.log(data);
+  };
+
+  console.log(getValues());
 
   return (
     <div className="flex w-full flex-col gap-6">
@@ -70,15 +100,22 @@ function Information({}: Panel) {
         personal <span className=" font-semibold"> information</span>
       </h2>
 
-      <form className="flex flex-col gap-3">
-        <Input label="First Name" {...register("firstName")} />
-      </form>
+      <form className="flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex flex-col gap-3">
+          <Input
+            name="First name"
+            placeholder="First name"
+            error={errors.firstName?.message?.toString()}
+            register={register}
+          />
+        </div>
 
-      <div className="flex flex-row justify-end">
-        <LinkButton color="primary" to="/cart?shipping=true">
-          Shipping
-        </LinkButton>
-      </div>
+        <div className="flex flex-row justify-end">
+          <Button type="submit" color="primary">
+            Shipping
+          </Button>
+        </div>
+      </form>
     </div>
   );
 }
@@ -128,22 +165,3 @@ function Payment({ back }: Panel) {
     </div>
   );
 }
-
-const Input = <T extends FieldValues>({
-  name,
-  register,
-  placeholder,
-}: {
-  name: string;
-  register: UseFormRegister<T>;
-  placeholder: string;
-}) => {
-  return (
-    <input
-      className="w-full rounded border border-bunker-900 bg-bunker-900 p-3"
-      name={name}
-      placeholder={placeholder}
-      {...register}
-    />
-  );
-};
