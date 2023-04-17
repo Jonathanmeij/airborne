@@ -4,7 +4,7 @@
 import { cva, type VariantProps } from "class-variance-authority";
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-const containerStyles = cva("px-4 md:px-6 ", {
+const containerStyles = cva(" ", {
   variants: {
     maxWidth: {
       none: "max-w-none",
@@ -22,9 +22,14 @@ const containerStyles = cva("px-4 md:px-6 ", {
       "9xl": "max-w-[100rem]",
       full: "max-w-full",
     },
+    padding: {
+      none: "px-0",
+      normal: "px-4 md:px-6",
+    },
   },
   defaultVariants: {
     maxWidth: "4xl",
+    padding: "normal",
   },
 });
 
@@ -37,9 +42,12 @@ export default function Container({
   children,
   className,
   maxWidth,
+  padding,
 }: ContainerProps) {
   return (
-    <div className={`${className ?? ""} ${containerStyles({ maxWidth })}`}>
+    <div
+      className={`${className ?? ""} ${containerStyles({ maxWidth, padding })}`}
+    >
       {children}
     </div>
   );
