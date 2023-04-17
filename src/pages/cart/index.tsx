@@ -39,7 +39,7 @@ export default function CartPage() {
             </ResizablePanel>
           </Container>
         </div>
-        <div className="hidden h-96 rounded border border-bunker-800 bg-bunker-900 p-3 lg:block lg:w-5/12 lg:p-6">
+        <div className="hidden h-max rounded border border-bunker-800 bg-bunker-900 p-3 lg:block lg:w-5/12 lg:p-6">
           <h2 className=" text-xl font-medium">
             Your <span className=" font-bold"> order</span>
           </h2>
@@ -91,7 +91,10 @@ function Information({}: Panel) {
   console.log(getValues());
 
   return (
-    <form className="flex w-full flex-col gap-6">
+    <form
+      className="flex w-full flex-col gap-6"
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <h2 className=" text-xl font-normal">
         personal <span className=" font-semibold"> information</span>
       </h2>
@@ -222,13 +225,25 @@ function Payment({ back }: Panel) {
 }
 
 function CartPanel() {
-  const { cart } = useCartContext();
+  const { cart, calculateTotal } = useCartContext();
+
+  if (cart.length === 0)
+    return <p className="pt-3 text-gray-400">Your cart is empty</p>;
 
   return (
-    <div>
-      {cart.map((item) => (
-        <CartItem key={item.id} CartItem={item} dark />
-      ))}
-    </div>
+    <>
+      <div className=" divide-y divide-bunker-800">
+        {cart.map((item) => (
+          <CartItem key={item.id} CartItem={item} dark />
+        ))}
+      </div>
+      <div className=" border-t border-bunker-800 pt-3 md:pt-6">
+        <span className="">Subtotal:</span>
+        <span className="float-right flex items-center gap-3">
+          <span className="text-xs font-light ">Euro</span>
+          <span className="text-lg font-semibold"> € {calculateTotal()}</span>
+        </span>
+      </div>
+    </>
   );
 }
