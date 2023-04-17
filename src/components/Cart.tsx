@@ -80,7 +80,7 @@ export default function CartMenu() {
                           </div>
                         )}
                         {cart.map((item) => (
-                          <CartItem key={item.Product.id} {...item} />
+                          <CartItem key={item.Product.id} CartItem={item} />
                         ))}
                       </div>
                       <div className="flex flex-col bg-white p-3 text-bunker-950">
@@ -112,7 +112,13 @@ export default function CartMenu() {
   );
 }
 
-function CartItem(CartItem: CartItem) {
+export function CartItem({
+  CartItem,
+  dark = false,
+}: {
+  CartItem: CartItem;
+  dark?: boolean;
+}) {
   const { updateQuantity, removeFromCart } = useCartContext();
 
   function deleteItem() {
@@ -137,20 +143,22 @@ function CartItem(CartItem: CartItem) {
           </div>
           <div>
             <span>{CartItem.Product.title}</span>
-            <div>
-              <span className="text-xs text-bunker-600">
-                Size: {CartItem.size},{" "}
-              </span>
-              <span className="text-xs text-bunker-600">
-                Color: {CartItem.color}
-              </span>
+            <div
+              className={`${dark ? "text-bunker-200" : "text-bunker-600"} pb-1`}
+            >
+              <span className="text-xs">Size: {CartItem.size}, </span>
+              <span className="text-xs">Color: {CartItem.color}</span>
             </div>
-            <QuantityInput value={CartItem.quantity} onChange={updateItem} />
+            <QuantityInput
+              dark={dark}
+              value={CartItem.quantity}
+              onChange={updateItem}
+            />
           </div>
         </div>
 
         <div className="flex flex-col items-end justify-center gap-3">
-          <span className="text-bunker-600">
+          <span className={`${dark ? "text-white" : "text-bunker-600"}`}>
             € {CartItem.Product.price * CartItem.quantity}
           </span>
           <svg
@@ -160,7 +168,7 @@ function CartItem(CartItem: CartItem) {
             strokeMiterlimit="2"
             height="24"
             width="24"
-            fill="#405661"
+            fill={dark ? "white" : "#405661"}
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
             className="float-right cursor-pointer"
