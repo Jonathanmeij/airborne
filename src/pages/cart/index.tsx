@@ -2,11 +2,7 @@
 
 import { useRouter } from "next/router";
 import { type ParsedUrlQuery } from "querystring";
-import {
-  type FieldValues,
-  type UseFormRegister,
-  useForm,
-} from "react-hook-form";
+import { useForm } from "react-hook-form";
 import {
   Button,
   Container,
@@ -15,7 +11,8 @@ import {
   ResizablePanel,
 } from "~/components/ui";
 import DisclosurePanel from "~/components/ui/Disclosure";
-import { FormInput } from "~/components/ui/FormInput";
+import { CartContext, useCartContext } from "../CartProvider";
+import { CartItem } from "~/components/Cart";
 
 // type Page = "information" | "payment" | "summary";
 
@@ -34,7 +31,7 @@ export default function CartPage() {
         className="relative m-auto flex h-full flex-col-reverse justify-end gap-6  pt-6 lg:flex-row"
       >
         <div className="h-max w-full rounded border border-bunker-800 bg-bunker-900 p-3 lg:w-7/12 lg:p-6">
-          <Container maxWidth="2xl" className="m-auto">
+          <Container maxWidth="lg" className="m-auto" padding="none">
             <ResizablePanel id={id}>
               {id === "information" && <Information back={back} />}
               {id === "shipping" && <Shiping back={back} />}
@@ -46,12 +43,10 @@ export default function CartPage() {
           <h2 className=" text-xl font-medium">
             Your <span className=" font-bold"> order</span>
           </h2>
+          <CartPanel />
         </div>
         <DisclosurePanel title="Your order" className="lg:hidden">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci,
-            harum?
-          </p>
+          <CartPanel />
         </DisclosurePanel>
       </Container>
     </div>
@@ -90,33 +85,93 @@ function Information({}: Panel) {
 
   const onSubmit = (data: InformationForm) => {
     console.log(data);
+    void router.push("/cart?shipping=true");
   };
 
   console.log(getValues());
 
   return (
-    <div className="flex w-full flex-col gap-6">
+    <form className="flex w-full flex-col gap-6">
       <h2 className=" text-xl font-normal">
         personal <span className=" font-semibold"> information</span>
       </h2>
 
-      <form className="flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex gap-3">
           <Input
-            name="First name"
+            name="firstName"
             placeholder="First name"
+            label="First name"
             error={errors.firstName?.message?.toString()}
+            options={{ required: "First name is required" }}
             register={register}
+            isRequired
+          />
+          <Input
+            name="lastName"
+            label="Last name"
+            placeholder="First name"
+            error={errors.lastName?.message?.toString()}
+            register={register}
+            options={{ required: "Last name is required" }}
+            isRequired
           />
         </div>
-
-        <div className="flex flex-row justify-end">
-          <Button type="submit" color="primary">
-            Shipping
-          </Button>
+        <Input
+          name="email"
+          label="Email"
+          placeholder="Email"
+          error={errors.email?.message?.toString()}
+          register={register}
+          options={{
+            required: "Email is required",
+            pattern: {
+              value: /^\S+@\S+$/i,
+              message: "Email is not valid",
+            },
+          }}
+          className=""
+          fullWidth
+          isRequired
+        />
+        <Input
+          name="address"
+          label="Address"
+          placeholder="Address"
+          error={errors.address?.message?.toString()}
+          register={register}
+          options={{ required: "Address is required" }}
+          fullWidth
+          isRequired
+        />
+        <div className="flex gap-3">
+          <Input
+            name="zip"
+            label="Zip"
+            placeholder="Zip"
+            error={errors.zip?.message?.toString()}
+            register={register}
+            options={{ required: "Zip is required" }}
+            isRequired
+          />
+          <Input
+            name="city"
+            label="City"
+            placeholder="City"
+            error={errors.city?.message?.toString()}
+            register={register}
+            options={{ required: "City is required" }}
+            isRequired
+          />
         </div>
-      </form>
-    </div>
+      </div>
+
+      <div className="flex flex-row justify-end">
+        <Button type="submit" color="primary">
+          Shipping
+        </Button>
+      </div>
+    </form>
   );
 }
 
@@ -162,6 +217,18 @@ function Payment({ back }: Panel) {
           Summary
         </LinkButton>
       </div>
+    </div>
+  );
+}
+
+function CartPanel() {
+  const { cart } = useCartContext();
+
+  return (
+    <div>
+      {cart.map((item) => (
+        <CartItem key={item.id} CartItem={item} dark />
+      ))}
     </div>
   );
 }
