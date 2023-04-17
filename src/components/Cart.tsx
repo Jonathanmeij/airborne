@@ -19,7 +19,7 @@ export default function CartMenu() {
   return (
     <div className="">
       <Popover className="h-full">
-        {({ open }) => (
+        {({ open, close }) => (
           <>
             <Popover.Button
               as="div"
@@ -95,6 +95,7 @@ export default function CartMenu() {
                           rounded="rounded"
                           className="mt-3"
                           to="/cart"
+                          onClick={close}
                         >
                           Checkout
                         </LinkButton>

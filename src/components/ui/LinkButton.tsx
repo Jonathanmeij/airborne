@@ -39,8 +39,9 @@ function LinkButton({
         textAlign,
         rounded,
       })} ${className ?? ""}`}
+      onClick={onClick}
     >
-      <button onClick={onClick} type={type} onMouseOver={onMouseOver}>
+      <button type={type} onMouseOver={onMouseOver}>
         {children}
       </button>
     </Link>
