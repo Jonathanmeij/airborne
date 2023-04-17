@@ -17,6 +17,7 @@ interface InputProps {
   rows?: number;
   isRequired?: boolean;
   noLabel?: boolean;
+  label?: string;
 }
 
 export function Input({
@@ -31,12 +32,14 @@ export function Input({
   defaultValue,
   isRequired,
   noLabel,
+  label,
 }: InputProps) {
   return (
     <div className="flex w-full flex-col ">
       {!noLabel && (
         <label htmlFor={name} className="mb-2 block text-sm font-medium  ">
-          {name} {isRequired && <span className="text-red-700">*</span>}
+          {label ? label : name}{" "}
+          {isRequired && <span className="text-blue-300">*</span>}
         </label>
       )}
       <input
@@ -47,9 +50,12 @@ export function Input({
           ...options,
         })}
         placeholder={placeholder}
-        className={`text-md border-san-marino-200 bg-san-marino-50 focus:ring-san-marino-500 block w-full  max-w-md  rounded-lg border  
+        className={`text-md border-bunker f
+        ocus:ring-san-marino-500 block w-full   rounded-lg border  border-bunker-700 bg-bunker-800  
                  p-2.5 placeholder-gray-400 focus:outline-none 
-                focus:ring-2 ${className} ${fullWidth ? "w-full" : ""}
+                focus:ring-2 ${className} ${
+          fullWidth ? "w-full" : ""
+        } place-self-auto
                 ${error ? "border-red-300 " : ""}
         `}
       />
