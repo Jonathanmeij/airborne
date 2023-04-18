@@ -11,16 +11,44 @@ import {
   ResizablePanel,
 } from "~/components/ui";
 import DisclosurePanel from "~/components/ui/Disclosure";
-import { CartContext, useCartContext } from "../CartProvider";
+import { useCartContext } from "../CartProvider";
 import { CartItem } from "~/components/Cart";
 import { useState } from "react";
+import { RadioGroup } from "@headlessui/react";
 
-// type Page = "information" | "payment" | "summary";
+type ShippingOption = {
+  name: string;
+  price: number;
+  delivery: string;
+};
+
+const SHIPPING_OPTIONS: ShippingOption[] = [
+  {
+    name: "Free",
+    price: 0.0,
+    delivery: "3-5 days",
+  },
+  {
+    name: "Standard",
+    price: 4.99,
+    delivery: "2-3 days",
+  },
+  {
+    name: "Express",
+    price: 9.99,
+    delivery: "1-2 days",
+  },
+];
+
+// type ShippingOptionType = keyof typeof SHIPPING_OPTIONS;
 
 export default function CartPage() {
   const [information, setInformation] = useState<InformationForm>();
+  const [shipping, setShipping] = useState<ShippingOption | undefined>(
+    SHIPPING_OPTIONS[0]
+  );
 
-  const { query, back } = useRouter();
+  const { query } = useRouter();
   const id = getPageId(query);
 
   return (
@@ -36,11 +64,12 @@ export default function CartPage() {
                 <Information
                   information={information}
                   setInformation={setInformation}
-                  back={back}
                 />
               )}
-              {id === "shipping" && <Shiping back={back} />}
-              {id === "payment" && <Payment back={back} />}
+              {id === "shipping" && (
+                <Shiping setShipping={setShipping} shipping={shipping} />
+              )}
+              {id === "payment" && <Payment />}
             </ResizablePanel>
           </Container>
         </div>
@@ -64,11 +93,7 @@ function getPageId(query: ParsedUrlQuery) {
   return "information";
 }
 
-interface Panel {
-  back: () => void;
-}
-
-interface InformationProps extends Panel {
+interface InformationProps {
   setInformation: (information: InformationForm) => void;
   information?: InformationForm;
 }
@@ -192,33 +217,25 @@ function Information({ information, setInformation }: InformationProps) {
   );
 }
 
-function Shiping({ back }: Panel) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    getValues,
-  } = useForm<InformationForm>();
-  const router = useRouter();
+interface ShipingProps {
+  setShipping: (shipping: ShippingOption) => void;
+  shipping: ShippingOption | undefined;
+}
 
-  const onSubmit = (data: InformationForm) => {
-    console.log(data);
-    void router.push("/cart?shipping=true");
-  };
+function Shiping({ setShipping, shipping }: ShipingProps) {
+  if (!shipping) return null;
 
   return (
     <form className="flex flex-col gap-6">
       <h2 className=" text-xl font-normal">
         shiping <span className=" font-semibold"> information</span>
       </h2>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci,
-        harum?
-      </p>
+
+      <ShippingRadio shipping={shipping} setShipping={setShipping} />
       <div className="flex flex-row justify-between">
-        <Button onClick={back} rounded="rounded" color="secondaryDark">
+        <LinkButton color="secondaryDark" rounded="rounded" to="/cart">
           Back
-        </Button>
+        </LinkButton>
         <LinkButton color="primary" to="/cart?payment=true">
           Payment
         </LinkButton>
@@ -227,7 +244,7 @@ function Shiping({ back }: Panel) {
   );
 }
 
-function Payment({ back }: Panel) {
+function Payment() {
   return (
     <div className="flex flex-col gap-6">
       <h2 className=" text-xl font-normal">
@@ -240,9 +257,13 @@ function Payment({ back }: Panel) {
         Sunt sint tempore iusto!
       </p>
       <div className="flex flex-row justify-between">
-        <Button onClick={back} rounded="rounded" color="secondaryDark">
+        <LinkButton
+          to="/cart?shipping=true"
+          rounded="rounded"
+          color="secondaryDark"
+        >
           Back
-        </Button>
+        </LinkButton>
         <LinkButton color="primary" to="/cart?summary=true">
           Summary
         </LinkButton>
@@ -272,5 +293,79 @@ function CartPanel() {
         </span>
       </div>
     </>
+  );
+}
+
+function ShippingRadio({ shipping, setShipping }: ShipingProps) {
+  return (
+    <RadioGroup value={shipping} onChange={setShipping}>
+      <RadioGroup.Label className="sr-only">Server size</RadioGroup.Label>
+      <div className="space-y-3 text-white">
+        {SHIPPING_OPTIONS.map((ship) => (
+          <RadioGroup.Option
+            key={ship.name}
+            value={ship}
+            className={({ active, checked }) =>
+              `${
+                active
+                  ? "ring-1 ring-white  ring-opacity-60 ring-offset-1 ring-offset-sky-300"
+                  : ""
+              }
+                  ${
+                    checked
+                      ? "border-sky-500 bg-bunker-800 bg-opacity-75 "
+                      : "bg-bunker-800"
+                  }
+                    relative flex cursor-pointer rounded border-2 border-bunker-800 
+                    p-3 shadow-md focus:outline-none`
+            }
+          >
+            {({ active, checked }) => (
+              <>
+                <div className="flex w-full items-center justify-between">
+                  <div className="flex items-center">
+                    <div className="text-sm">
+                      <RadioGroup.Label
+                        as="p"
+                        className={`font-semibold  ${
+                          checked ? "text-white" : "text-gray-200"
+                        }`}
+                      >
+                        {ship.name}
+                      </RadioGroup.Label>
+                      <RadioGroup.Description
+                        as="span"
+                        className={`inline ${
+                          checked ? "text-sky-100" : "text-gray-100"
+                        }`}
+                      >
+                        <span>
+                          {ship.price === 0 ? "Free" : `€ ${ship.price}`}
+                        </span>{" "}
+                        <span aria-hidden="true">&middot;</span>{" "}
+                        <span>{ship.delivery}</span>
+                      </RadioGroup.Description>
+                    </div>
+                  </div>
+                  {checked && (
+                    <div className="shrink-0 text-white">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="15"
+                        height="15"
+                        viewBox="0 0 24 24"
+                        fill="white"
+                      >
+                        <path d="M9 22l-10-10.598 2.798-2.859 7.149 7.473 13.144-14.016 2.909 2.806z" />
+                      </svg>
+                    </div>
+                  )}
+                </div>
+              </>
+            )}
+          </RadioGroup.Option>
+        ))}
+      </div>
+    </RadioGroup>
   );
 }
