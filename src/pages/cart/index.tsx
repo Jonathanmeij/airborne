@@ -134,9 +134,14 @@ function Information({ information, setInformation }: InformationProps) {
       className="flex w-full flex-col gap-6"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <h2 className=" text-xl font-normal">
-        personal <span className=" font-semibold"> information</span>
-      </h2>
+      <div>
+        <h2 className=" text-xl font-normal">
+          Personal <span className=" font-semibold"> information</span>
+        </h2>
+        <p className=" text-sm text-gray-500">
+          {`This is a fake store, don't use real information.`}
+        </p>
+      </div>
 
       <div className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex gap-3">
@@ -244,18 +249,74 @@ function Shiping({ setShipping, shipping }: ShipingProps) {
   );
 }
 
+type PaymentForm = {
+  cardNumber: string;
+  expirationDate: string;
+  cvv: string;
+  cardHolder: string;
+};
+
 function Payment() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    getValues,
+  } = useForm<PaymentForm>();
+
   return (
-    <div className="flex flex-col gap-6">
-      <h2 className=" text-xl font-normal">
-        payment <span className=" font-semibold"> information</span>
-      </h2>
-      <p>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur
-        cum corporis voluptas voluptatum ut voluptatibus labore molestias
-        architecto ducimus nesciunt dolor eos, blanditiis fuga cupiditate iste!
-        Sunt sint tempore iusto!
-      </p>
+    <form className="flex flex-col gap-6" onSubmit={handleSubmit(console.log)}>
+      <div>
+        <h2 className=" text-xl font-normal">
+          payment <span className=" font-semibold"> information</span>
+        </h2>
+        <p className=" text-sm text-gray-500">
+          {`This is a fake store, don't use real information.`}
+        </p>
+      </div>
+
+      <div className="flex flex-col gap-3">
+        <Input
+          name="cardNumber"
+          label="Card number"
+          placeholder="Card number"
+          error={errors.cardNumber?.message?.toString()}
+          register={register}
+          options={{ required: "Card number is required" }}
+          isRequired
+        />
+        <div className="flex gap-3">
+          <Input
+            name="expirationDate"
+            label="Expiration date"
+            placeholder="Expiration date"
+            error={errors.expirationDate?.message?.toString()}
+            register={register}
+            options={{ required: "Expiration date is required" }}
+            isRequired
+          />
+
+          <Input
+            name="cvv"
+            label="CVV"
+            placeholder="CVV"
+            error={errors.cvv?.message?.toString()}
+            register={register}
+            options={{ required: "CVV is required" }}
+            isRequired
+          />
+        </div>
+        <Input
+          name="cardHolder"
+          label="Card holder"
+          placeholder="Card holder"
+          error={errors.cardHolder?.message?.toString()}
+          register={register}
+          options={{ required: "Card holder is required" }}
+          isRequired
+        />
+      </div>
+
       <div className="flex flex-row justify-between">
         <LinkButton
           to="/cart?shipping=true"
@@ -264,11 +325,11 @@ function Payment() {
         >
           Back
         </LinkButton>
-        <LinkButton color="primary" to="/cart?summary=true">
-          Summary
-        </LinkButton>
+        <Button type="submit" color="primary">
+          Pay
+        </Button>
       </div>
-    </div>
+    </form>
   );
 }
 
