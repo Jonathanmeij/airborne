@@ -41,21 +41,17 @@ function Succes() {
       >
         Thank you for your order!
       </motion.h1>
-      <motion.p
-        initial={{ opacity: 0, height: 0 }}
-        animate={{ opacity: 1, height: "auto" }}
-        transition={{ duration: 0.5, delay: 0.8 }}
-        className="mt-3 max-w-md text-center"
-      >
-        Your order has been placed. We will send you a confirmation email with a
-        link to track your order.
-      </motion.p>
+
       <motion.div
-        className="mt-6"
+        className="mt-3 flex flex-col items-center"
         initial={{ opacity: 0, height: 0 }}
         animate={{ opacity: 1, height: "auto" }}
-        transition={{ duration: 0.5, delay: 1.11 }}
+        transition={{ duration: 0.5, delay: 0.9 }}
       >
+        <p className="mb-6 max-w-md text-center">
+          Your order has been placed. We will send you a confirmation email with
+          a link to track your order.
+        </p>
         <LinkButton color={"primary"} to="/">
           Back to home
         </LinkButton>

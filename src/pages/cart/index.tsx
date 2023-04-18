@@ -16,6 +16,7 @@ import { CartItem } from "~/components/Cart";
 import { useState } from "react";
 import { RadioGroup } from "@headlessui/react";
 import { AnimatePresence, motion } from "framer-motion";
+import Link from "next/link";
 
 type ShippingOption = {
   name: string;
@@ -118,7 +119,6 @@ function Information({ information, setInformation }: InformationProps) {
     register,
     handleSubmit,
     formState: { errors },
-    getValues,
   } = useForm<InformationForm>(
     information && {
       defaultValues: information,
@@ -263,7 +263,6 @@ function Payment() {
     register,
     handleSubmit,
     formState: { errors },
-    getValues,
   } = useForm<PaymentForm>();
 
   return (
@@ -323,13 +322,13 @@ function Payment() {
         <LinkButton
           to="/cart?shipping=true"
           rounded="rounded"
-          color="secondaryDark"
+          color="noneLight"
         >
           Back
         </LinkButton>
-        <Button type="submit" color="primary">
-          Pay
-        </Button>
+        <LinkButton color="primary" to="/cart/succes">
+          Confirm
+        </LinkButton>
       </div>
     </form>
   );
@@ -400,7 +399,7 @@ function ShippingRadio({ shipping, setShipping }: ShipingProps) {
                     p-3 shadow-md focus:outline-none`
             }
           >
-            {({ active, checked }) => (
+            {({ checked }) => (
               <>
                 <div className="flex w-full items-center justify-between">
                   <div className="flex items-center">
