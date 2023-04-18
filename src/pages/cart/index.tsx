@@ -13,15 +13,14 @@ import {
 import DisclosurePanel from "~/components/ui/Disclosure";
 import { CartContext, useCartContext } from "../CartProvider";
 import { CartItem } from "~/components/Cart";
+import { useState } from "react";
 
 // type Page = "information" | "payment" | "summary";
 
 export default function CartPage() {
-  const { query, back } = useRouter();
+  const [information, setInformation] = useState<InformationForm>();
 
-  // const isPaymentSelected = !!query.payment;
-  // const isShippingSelected = !!query.shipping;
-  // const isInformationSelected = !isPaymentSelected && !isShippingSelected;
+  const { query, back } = useRouter();
   const id = getPageId(query);
 
   return (
@@ -33,7 +32,13 @@ export default function CartPage() {
         <div className="h-max w-full rounded border border-bunker-800 bg-bunker-900 p-3 lg:w-7/12 lg:p-6">
           <Container maxWidth="lg" className="m-auto" padding="none">
             <ResizablePanel id={id}>
-              {id === "information" && <Information back={back} />}
+              {id === "information" && (
+                <Information
+                  information={information}
+                  setInformation={setInformation}
+                  back={back}
+                />
+              )}
               {id === "shipping" && <Shiping back={back} />}
               {id === "payment" && <Payment back={back} />}
             </ResizablePanel>
@@ -63,6 +68,11 @@ interface Panel {
   back: () => void;
 }
 
+interface InformationProps extends Panel {
+  setInformation: (information: InformationForm) => void;
+  information?: InformationForm;
+}
+
 type InformationForm = {
   firstName: string;
   lastName: string;
@@ -74,17 +84,21 @@ type InformationForm = {
   country: string;
 };
 
-function Information({}: Panel) {
+function Information({ information, setInformation }: InformationProps) {
   const {
     register,
     handleSubmit,
     formState: { errors },
     getValues,
-  } = useForm<InformationForm>();
+  } = useForm<InformationForm>(
+    information && {
+      defaultValues: information,
+    }
+  );
   const router = useRouter();
 
   const onSubmit = (data: InformationForm) => {
-    console.log(data);
+    setInformation(data);
     void router.push("/cart?shipping=true");
   };
 
@@ -179,8 +193,21 @@ function Information({}: Panel) {
 }
 
 function Shiping({ back }: Panel) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    getValues,
+  } = useForm<InformationForm>();
+  const router = useRouter();
+
+  const onSubmit = (data: InformationForm) => {
+    console.log(data);
+    void router.push("/cart?shipping=true");
+  };
+
   return (
-    <div className="flex flex-col gap-6">
+    <form className="flex flex-col gap-6">
       <h2 className=" text-xl font-normal">
         shiping <span className=" font-semibold"> information</span>
       </h2>
@@ -196,7 +223,7 @@ function Shiping({ back }: Panel) {
           Payment
         </LinkButton>
       </div>
-    </div>
+    </form>
   );
 }
 
