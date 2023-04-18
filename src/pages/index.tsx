@@ -13,6 +13,31 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Footer from "~/components/Footer";
 
+const Title = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.3,
+    },
+  },
+};
+
+const AnimatedTextVariants = {
+  hidden: {
+    opacity: 0,
+    x: -20,
+  },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.3,
+    },
+  },
+};
+
 const Home: NextPage = () => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -65,25 +90,35 @@ const Home: NextPage = () => {
           </motion.div>
           <Container maxWidth="7xl" className=" relative z-20 m-auto">
             <motion.div
+              variants={Title}
+              initial="hidden"
+              animate="show"
               style={{ scale, opacity: textOpacity }}
               className="absolute bottom-0 z-20 flex flex-col gap-4  pb-24 pr-4  md:gap-6 md:pb-16 md:pr-0  md:text-left"
             >
-              <h1 className="max max-w-xl text-5xl font-bold md:text-7xl">
-                Take Your Kitesurfing to New Heights
-              </h1>
-              <p className="max md:text-md z-0 max-w-lg text-lg font-light text-gray-200">
-                Airborne Kiteboarding offers a wide range of kitesurfing gear
-                for all levels of riders, from beginner packages to
-                high-performance gear.
-              </p>
-              <Button
-                color="primary"
-                font="semibold"
-                padding="wide"
-                className=" self-start md:mx-0"
-              >
-                SHOP NOW
-              </Button>
+              <motion.div variants={AnimatedTextVariants}>
+                <h1 className="max max-w-xl text-5xl font-bold md:text-7xl">
+                  Take Your Kitesurfing to New Heights
+                </h1>
+              </motion.div>
+
+              <motion.div variants={AnimatedTextVariants}>
+                <p className="max md:text-md z-0 max-w-lg text-lg font-light text-gray-200">
+                  Airborne Kiteboarding offers a wide range of kitesurfing gear
+                  for all levels of riders, from beginner packages to
+                  high-performance gear.
+                </p>
+              </motion.div>
+              <motion.div variants={AnimatedTextVariants}>
+                <Button
+                  color="primary"
+                  font="semibold"
+                  padding="wide"
+                  className=" self-start md:mx-0"
+                >
+                  SHOP NOW
+                </Button>
+              </motion.div>
             </motion.div>
           </Container>
         </div>
@@ -259,5 +294,18 @@ function AboutUsSection() {
         </div>
       </Container>
     </div>
+  );
+}
+
+function AnimatedText({ children }: { children: React.ReactNode }) {
+  return (
+    <motion.div
+      className="relative"
+      variants={AnimatedTextVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      {children}
+    </motion.div>
   );
 }
