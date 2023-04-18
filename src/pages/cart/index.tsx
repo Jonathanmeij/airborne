@@ -15,7 +15,7 @@ import { useCartContext } from "../CartProvider";
 import { CartItem } from "~/components/Cart";
 import { useState } from "react";
 import { RadioGroup } from "@headlessui/react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 type ShippingOption = {
   name: string;
@@ -131,8 +131,6 @@ function Information({ information, setInformation }: InformationProps) {
     void router.push("/cart?shipping=true");
   };
 
-  console.log(getValues());
-
   return (
     <form
       className="flex w-full flex-col gap-6"
@@ -242,7 +240,7 @@ function Shiping({ setShipping, shipping }: ShipingProps) {
 
       <ShippingRadio shipping={shipping} setShipping={setShipping} />
       <div className="flex flex-row justify-between">
-        <LinkButton color="secondaryDark" rounded="rounded" to="/cart">
+        <LinkButton color="noneLight" rounded="rounded" to="/cart">
           Back
         </LinkButton>
         <LinkButton color="primary" to="/cart?payment=true">
@@ -460,7 +458,7 @@ function ProgressBar({
   steps: number;
 }) {
   return (
-    <div className="mx-auto flex  justify-between pb-3">
+    <div className="md mx-auto  flex justify-between pb-3 md:pb-6">
       {Array.from({ length: steps }, (_, i) => (
         <Step key={i} step={i + 1} currentStep={currentStep} />
       ))}
@@ -494,25 +492,61 @@ function Step({ step, currentStep }: { step: number; currentStep: number }) {
       ? "completed"
       : "inactive";
 
+  console.log(status, step, currentStep);
+
   return (
     <motion.div
       className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-bunker-800"
       variants={stepVariants}
       animate={status}
     >
-      {status === "completed" ? (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="15"
-          height="15"
-          viewBox="0 0 24 24"
-          fill="white"
-        >
-          <path d="M9 22l-10-10.598 2.798-2.859 7.149 7.473 13.144-14.016 2.909 2.806z" />
-        </svg>
-      ) : (
-        step
-      )}
+      <AnimatePresence>
+        {status === "completed" ? (
+          <CheckIcon />
+        ) : (
+          <motion.span
+            key="step"
+            animate={{ opacity: 1 }}
+            exit={{ scale: 0.5, opacity: 0 }}
+            className="absolute"
+          >
+            {step}
+          </motion.span>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }
+
+function CheckIcon() {
+  return (
+    <svg
+      fill="none"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={3}
+    >
+      <motion.path
+        variants={checkIconVariants}
+        transition={checkIconTransition}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M5 13l4 4L19 7"
+      />
+    </svg>
+  );
+}
+
+const checkIconTransition = {
+  ease: "easeOut",
+  type: "tween",
+  delay: 0.2,
+  duration: 0.2,
+};
+const checkIconVariants = {
+  completed: {
+    pathLength: [0, 1],
+  },
+};

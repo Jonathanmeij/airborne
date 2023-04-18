@@ -13,6 +13,7 @@ export const buttonStyles = cva("font-medium  border-1", {
       secondaryDark: " bg-bunker-800 text-white hover:bg-bunker-700 ",
       black: " bg-bunker-950 text-white hover:bg-bunker-900 ",
       none: "bg-transparent hover:bg-san-marino-50 border-0",
+      noneLight: "bg-transparent text-bunker-200  border-0",
       danger: " bg-red-100 text-red-800 hover:bg-red-200 border-red-500",
     },
     padding: {
