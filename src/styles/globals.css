@@ -6,3 +6,9 @@
 html {
   @apply overscroll-none bg-bunker-950 font-montserrat text-white;
 }
+
+:root {
+  --sky-500: theme("colors.sky.500");
+  --bunker-800: theme("colors.bunker.800");
+  --bunker-900: theme("colors.bunker.900");
+}

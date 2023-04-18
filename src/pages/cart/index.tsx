@@ -15,6 +15,7 @@ import { useCartContext } from "../CartProvider";
 import { CartItem } from "~/components/Cart";
 import { useState } from "react";
 import { RadioGroup } from "@headlessui/react";
+import { motion } from "framer-motion";
 
 type ShippingOption = {
   name: string;
@@ -50,6 +51,7 @@ export default function CartPage() {
 
   const { query } = useRouter();
   const id = getPageId(query);
+  const step = id === "information" ? 1 : id === "shipping" ? 2 : 3;
 
   return (
     <div className="mb-16 h-screen pt-16">
@@ -58,7 +60,9 @@ export default function CartPage() {
         className="relative m-auto flex h-full flex-col-reverse justify-end gap-6  pt-6 lg:flex-row"
       >
         <div className="h-max w-full rounded border border-bunker-800 bg-bunker-900 p-3 lg:w-7/12 lg:p-6">
-          <Container maxWidth="lg" className="m-auto" padding="none">
+          <Container maxWidth="md" className="m-auto" padding="none">
+            <ProgressBar steps={3} currentStep={step} />
+
             <ResizablePanel id={id}>
               {id === "information" && (
                 <Information
@@ -445,5 +449,58 @@ function ShippingRadio({ shipping, setShipping }: ShipingProps) {
         ))}
       </div>
     </RadioGroup>
+  );
+}
+
+function ProgressBar({
+  currentStep,
+  steps,
+}: {
+  currentStep: number;
+  steps: number;
+}) {
+  return (
+    <div className="mx-auto flex  justify-between pb-3">
+      {Array.from({ length: steps }, (_, i) => (
+        <Step key={i} step={i + 1} currentStep={currentStep} />
+      ))}
+    </div>
+  );
+}
+
+const stepVariants = {
+  inactive: {
+    backgroundColor: "var(--bunker-900)",
+    border: "2px solid",
+    borderColor: "var(--bunker-800)",
+  },
+  active: {
+    backgroundColor: "var(--bunker-900)",
+    border: "2px solid",
+    borderColor: "var(--sky-500)",
+  },
+  completed: {
+    backgroundColor: "var(--sky-500)",
+    border: "2px solid",
+    borderColor: "var(--sky-500)",
+  },
+};
+
+function Step({ step, currentStep }: { step: number; currentStep: number }) {
+  const status =
+    step === currentStep
+      ? "active"
+      : step < currentStep
+      ? "completed"
+      : "inactive";
+
+  return (
+    <motion.div
+      className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-bunker-800"
+      variants={stepVariants}
+      animate={status}
+    >
+      {step}
+    </motion.div>
   );
 }
