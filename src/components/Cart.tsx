@@ -131,7 +131,7 @@ export function CartItem({
 
   return (
     <>
-      <div className="flex justify-between gap-3 py-3">
+      <div className="flex justify-between gap-3 py-3 text-sm">
         <div className="flex items-center gap-3">
           <div className="relative h-14 w-14 overflow-hidden rounded">
             <Image

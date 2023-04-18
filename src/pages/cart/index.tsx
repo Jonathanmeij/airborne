@@ -52,7 +52,7 @@ export default function CartPage() {
   const id = getPageId(query);
 
   return (
-    <div className="h-screen pt-16">
+    <div className="mb-16 h-screen pt-16">
       <Container
         maxWidth="7xl"
         className="relative m-auto flex h-full flex-col-reverse justify-end gap-6  pt-6 lg:flex-row"
@@ -77,10 +77,10 @@ export default function CartPage() {
           <h2 className=" text-xl font-medium">
             Your <span className=" font-bold"> order</span>
           </h2>
-          <CartPanel />
+          <CartPanel shipping={shipping} />
         </div>
         <DisclosurePanel title="Your order" className="lg:hidden">
-          <CartPanel />
+          <CartPanel shipping={shipping} />
         </DisclosurePanel>
       </Container>
     </div>
@@ -272,7 +272,7 @@ function Payment() {
   );
 }
 
-function CartPanel() {
+function CartPanel({ shipping }: { shipping?: ShippingOption }) {
   const { cart, calculateTotal } = useCartContext();
 
   if (cart.length === 0)
@@ -285,11 +285,28 @@ function CartPanel() {
           <CartItem key={item.id} CartItem={item} dark />
         ))}
       </div>
+      <div className=" border-t border-bunker-800 py-3 text-sm md:py-6">
+        <div>
+          <span className="">Subtotal:</span>
+          <span className="float-right flex items-center gap-3">
+            € {calculateTotal()}
+          </span>
+        </div>
+        <div>
+          <span className="">Shipping:</span>
+          <span className="float-right flex items-center gap-3">
+            € {shipping?.price}
+          </span>
+        </div>
+      </div>
       <div className=" border-t border-bunker-800 pt-3 md:pt-6">
-        <span className="">Subtotal:</span>
+        <span className="">Total:</span>
         <span className="float-right flex items-center gap-3">
           <span className="text-xs font-light ">Euro</span>
-          <span className="text-lg font-semibold"> € {calculateTotal()}</span>
+          <span className="text-lg font-semibold">
+            {" "}
+            € {shipping ? calculateTotal() + shipping?.price : calculateTotal()}
+          </span>
         </span>
       </div>
     </>
