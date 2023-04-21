@@ -33,4 +33,18 @@ export const productRouter = createTRPCRouter({
         },
       });
     }),
+
+  getProductsByType: publicProcedure
+    .input(
+      z.object({
+        type: z.enum(["KITE", "BOARD", "WETSUIT"]),
+      })
+    )
+    .query(({ input, ctx }) => {
+      return ctx.prisma.product.findMany({
+        where: {
+          productType: input.type,
+        },
+      });
+    }),
 });
