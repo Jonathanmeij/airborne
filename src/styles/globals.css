@@ -11,4 +11,5 @@ html {
   --sky-500: theme("colors.sky.500");
   --zinc-800: theme("colors.zinc.800");
   --zinc-900: theme("colors.zinc.900");
+  --color-primary: theme("colors.zinc.950");
 }
