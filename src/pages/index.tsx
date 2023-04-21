@@ -103,7 +103,7 @@ const Home: NextPage = () => {
               </motion.div>
 
               <motion.div variants={AnimatedTextVariants}>
-                <p className="max md:text-md z-0 max-w-lg text-lg font-light text-gray-200">
+                <p className="max md:text-md z-0 max-w-lg text-lg font-light text-zinc-200">
                   Airborne Kiteboarding offers a wide range of kitesurfing gear
                   for all levels of riders, from beginner packages to
                   high-performance gear.
@@ -163,7 +163,7 @@ function KitesSection() {
           <h2 className=" pb-4 text-center text-4xl font-medium">
             Discover our <span className=" font-bold"> Products</span>
           </h2>
-          <p className="max-w-2xl text-center font-light text-gray-300">
+          <p className="max-w-2xl text-center font-light text-zinc-300">
             Check the new 2023 range of kites, boards and wetsuits.
           </p>
         </motion.div>
@@ -242,9 +242,9 @@ function GridElement({
     <motion.div
       style={{ scale }}
       ref={ref}
-      className="relative h-[70vh] overflow-hidden rounded-lg bg-gray-800 "
+      className="relative h-[70vh] overflow-hidden rounded-lg bg-zinc-800 "
     >
-      <div className=" absolute top-0 z-10 h-full w-full bg-gray-950 opacity-10" />
+      <div className=" absolute top-0 z-10 h-full w-full bg-zinc-950 opacity-10" />
       <div className=" absolute top-0 z-10 h-full w-full bg-gradient-to-t from-black opacity-80" />
       <Image
         src={image}
@@ -270,7 +270,7 @@ function GridElement({
 
 function AboutUsSection() {
   return (
-    <div className="relative h-max w-full bg-bunker-900 md:h-screen">
+    <div className="relative h-max w-full bg-zinc-900 md:h-screen">
       <Container maxWidth="7xl" className="m-auto md:h-screen">
         <div className=" md:max-w-8xl mx-auto h-full w-full md:flex md:items-center">
           <Image
@@ -282,7 +282,7 @@ function AboutUsSection() {
             <h2 className=" pb-4  text-4xl font-medium md:w-2/5">
               About <span className=" font-bold"> Us</span>
             </h2>
-            <p className="max-w-2xl font-light text-gray-300">
+            <p className="max-w-2xl font-light text-zinc-300">
               We are a small team of passionate kitesurfers who love to share
               our passion with others. We are based in the beautiful city of
               Amsterdam and we are always ready to help you with any questions

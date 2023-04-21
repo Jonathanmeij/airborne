@@ -9,11 +9,11 @@ export const buttonStyles = cva("font-medium  border-1", {
     color: {
       primary: " bg-sky-500 text-white hover:bg-sky-600  ",
       secondary:
-        " bg-white text-black  text-san-marino-900 hover:bg-gray-200 shadow-md",
-      secondaryDark: " bg-bunker-800 text-white hover:bg-bunker-700 ",
-      black: " bg-bunker-950 text-white hover:bg-bunker-900 ",
+        " bg-white text-black  text-san-marino-900 hover:bg-zinc-200 shadow-md",
+      secondaryDark: " bg-zinc-800 text-white hover:bg-zinc-700 ",
+      black: " bg-zinc-950 text-white hover:bg-zinc-900 ",
       none: "bg-transparent hover:bg-san-marino-50 border-0",
-      noneLight: "bg-transparent text-bunker-200  border-0",
+      noneLight: "bg-transparent text-zinc-200  border-0",
       danger: " bg-red-100 text-red-800 hover:bg-red-200 border-red-500",
     },
     padding: {

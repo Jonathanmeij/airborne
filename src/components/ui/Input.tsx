@@ -50,9 +50,9 @@ export function Input({
           ...options,
         })}
         placeholder={placeholder}
-        className={`text-md border-bunker f
-        ocus:ring-san-marino-500 block w-full   rounded-lg border  border-bunker-700 bg-bunker-800  
-                 p-2.5 placeholder-gray-400 focus:outline-none 
+        className={`text-md border-zinc f
+        ocus:ring-san-marino-500 block w-full   rounded-lg border  border-zinc-700 bg-zinc-800  
+                 p-2.5 placeholder-zinc-400 focus:outline-none 
                 focus:ring-2 ${className} ${
           fullWidth ? "w-full" : ""
         } place-self-auto
@@ -89,7 +89,7 @@ export function TextArea({
           ...options,
         })}
         placeholder={placeholder}
-        className={`text-md border-san-marino-200 bg-san-marino-50 focus:ring-san-marino-500 block w-full max-w-md rounded-lg  border p-2.5   placeholder-gray-400 focus:outline-none focus:ring-2 ${className} ${
+        className={`text-md border-san-marino-200 bg-san-marino-50 focus:ring-san-marino-500 block w-full max-w-md rounded-lg  border p-2.5   placeholder-zinc-400 focus:outline-none focus:ring-2 ${className} ${
           fullWidth ? "w-full" : ""
         }
                 ${error ? "border-red-400 " : ""}
@@ -113,7 +113,7 @@ export function ListBox({ selected, setSelected, options }: ListBoxProps) {
       value={selected}
       onChange={setSelected}
     >
-      <Listbox.Button className="border-san-marino-200 flex w-full items-center justify-between rounded-lg border  p-2.5 placeholder-gray-400 ">
+      <Listbox.Button className="border-san-marino-200 flex w-full items-center justify-between rounded-lg border  p-2.5 placeholder-zinc-400 ">
         <span>{selected + 1}</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -143,7 +143,7 @@ export function ListBox({ selected, setSelected, options }: ListBoxProps) {
                 `relative cursor-default select-none py-2 pl-10 pr-2 ${
                   active
                     ? "bg-san-marino-100 text-san-marino-900"
-                    : "text-gray-900"
+                    : "text-zinc-900"
                 }`
               }
             >

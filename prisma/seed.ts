@@ -82,7 +82,7 @@ async function main() {
             color: "#ffffff",
           },
           {
-            name: "Orange",
+            name: "sky",
             color: "#ff6600",
           },
         ],
@@ -145,15 +145,15 @@ main()
 //             answers: {
 //               create: [
 //                 {
-//                   answer: "<body style='background-color:yellow;'>",
+//                   answer: "<body style='background-color:sky;'>",
 //                   isCorrect: true,
 //                 },
 //                 {
-//                   answer: "<body bg='yellow'>",
+//                   answer: "<body bg='sky'>",
 //                   isCorrect: false,
 //                 },
 //                 {
-//                   answer: "<background>yellow</background>",
+//                   answer: "<background>sky</background>",
 //                   isCorrect: false,
 //                 },
 //               ],

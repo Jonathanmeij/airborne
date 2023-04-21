@@ -90,7 +90,7 @@ function Spinner() {
         animate={{ rotate: 360 }}
         exit={{ opacity: 0 }}
         transition={spinTransition}
-        className="block  rounded-full border-4 border-t-4 border-bunker-800 border-t-bunker-400"
+        className="block  rounded-full border-4 border-t-4 border-zinc-800 border-t-zinc-400"
       ></motion.span>
     </motion.div>
   );

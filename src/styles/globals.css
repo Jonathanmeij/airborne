@@ -4,11 +4,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap");
 
 html {
-  @apply overscroll-none bg-bunker-950 font-montserrat text-white;
+  @apply overscroll-none bg-zinc-950 font-montserrat text-white;
 }
 
 :root {
   --sky-500: theme("colors.sky.500");
-  --bunker-800: theme("colors.bunker.800");
-  --bunker-900: theme("colors.bunker.900");
+  --zinc-800: theme("colors.zinc.800");
+  --zinc-900: theme("colors.zinc.900");
 }

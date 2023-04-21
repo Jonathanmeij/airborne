@@ -8,13 +8,13 @@ export default function Footer() {
         maxWidth="7xl"
         className="m-auto  justify-between p-6 md:flex md:py-12"
       >
-        <div className=" border-bunker-800 p-2 ">
+        <div className=" border-zinc-800 p-2 ">
           <h1 className="text-3xl font-bold">
             <Link href="/">AIRBORNE</Link>
           </h1>
         </div>
 
-        <div className=" border-t border-bunker-800 p-2 md:border-0 md:border-l">
+        <div className=" border-t border-zinc-800 p-2 md:border-0 md:border-l">
           <h3 className=" text-lg  font-semibold">Products</h3>
           <ul className=" font-light text-slate-300 ">
             <li>
@@ -29,7 +29,7 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div className=" border-t border-bunker-800 p-2 md:border-0 md:border-l">
+        <div className=" border-t border-zinc-800 p-2 md:border-0 md:border-l">
           <h3 className=" text-lg  font-semibold">Company</h3>
           <ul className=" font-light text-slate-300 ">
             <li>
@@ -44,7 +44,7 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div className=" border-t border-bunker-800 p-2 md:border-0 md:border-l">
+        <div className=" border-t border-zinc-800 p-2 md:border-0 md:border-l">
           <h3 className=" text-lg  font-semibold">Creator</h3>
           <ul className=" font-light text-slate-300 hover:text-slate-50">
             <li>
@@ -61,7 +61,7 @@ export default function Footer() {
           </ul>
         </div>
       </Container>
-      <div className="bg-bunker-900">
+      <div className="bg-zinc-900">
         <Container maxWidth="7xl" className="m-auto  py-3 text-center">
           <span className=" text-xs font-light text-slate-300">
             © Copyright Jonathan van der Meij 2023 - All Rights Reserved

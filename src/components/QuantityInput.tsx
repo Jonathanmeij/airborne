@@ -20,8 +20,8 @@ export default function QuantityInput({
       <button
         className={`flex h-8 w-8 items-center justify-center rounded-l-md border text-center ${
           dark
-            ? "border-bunker-700 bg-bunker-800 text-white"
-            : "border-gray-300 bg-white text-gray-500 hover:bg-gray-50"
+            ? "border-zinc-700 bg-zinc-800 text-white"
+            : "border-zinc-300 bg-white text-zinc-500 hover:bg-zinc-50"
         } `}
         onClick={() => decrement()}
       >
@@ -30,8 +30,8 @@ export default function QuantityInput({
       <div
         className={`flex h-8 w-8 items-center justify-center border-b border-t text-center ${
           dark
-            ? "border-bunker-700 bg-bunker-800 text-white"
-            : "border-gray-300 bg-white  text-gray-500"
+            ? "border-zinc-700 bg-zinc-800 text-white"
+            : "border-zinc-300 bg-white  text-zinc-500"
         }`}
       >
         {value}
@@ -39,8 +39,8 @@ export default function QuantityInput({
       <button
         className={`flex h-8 w-8 items-center justify-center rounded-r-md border text-center ${
           dark
-            ? "border-bunker-700 bg-bunker-800 text-white"
-            : "border-gray-300 bg-white text-gray-500 hover:bg-gray-50"
+            ? "border-zinc-700 bg-zinc-800 text-white"
+            : "border-zinc-300 bg-white text-zinc-500 hover:bg-zinc-50"
         } `}
         onClick={() => onChange(value + 1)}
       >

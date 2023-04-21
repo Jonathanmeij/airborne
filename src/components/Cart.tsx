@@ -68,13 +68,13 @@ export default function CartMenu() {
                 >
                   <Container maxWidth="7xl" className="m-auto">
                     <div className=" overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                      <div className="  bg-white p-3 text-bunker-950">
+                      <div className="  bg-white p-3 text-zinc-950">
                         <span className=" text-xl font-semibold">Cart</span>
                       </div>
-                      <div className="flex flex-col  divide-y bg-gray-100 px-3 text-bunker-950">
+                      <div className="flex flex-col  divide-y bg-zinc-100 px-3 text-zinc-950">
                         {cart.length === 0 && (
                           <div className="p-3 text-center">
-                            <span className=" text-bunker-600">
+                            <span className=" text-zinc-600">
                               Your cart is empty
                             </span>
                           </div>
@@ -83,7 +83,7 @@ export default function CartMenu() {
                           <CartItem key={item.Product.id} CartItem={item} />
                         ))}
                       </div>
-                      <div className="flex flex-col bg-white p-3 text-bunker-950">
+                      <div className="flex flex-col bg-white p-3 text-zinc-950">
                         <span>
                           <span className="font-semibold">Subtotal:</span>
                           <span className="float-right">
@@ -143,9 +143,7 @@ export function CartItem({
           </div>
           <div>
             <span>{CartItem.Product.title}</span>
-            <div
-              className={`${dark ? "text-bunker-200" : "text-bunker-600"} pb-1`}
-            >
+            <div className={`${dark ? "text-zinc-200" : "text-zinc-600"} pb-1`}>
               <span className="text-xs">Size: {CartItem.size}, </span>
               <span className="text-xs">Color: {CartItem.color}</span>
             </div>
@@ -158,7 +156,7 @@ export function CartItem({
         </div>
 
         <div className="flex flex-col items-end justify-center gap-3">
-          <span className={`${dark ? "text-white" : "text-bunker-600"}`}>
+          <span className={`${dark ? "text-white" : "text-zinc-600"}`}>
             € {CartItem.Product.price * CartItem.quantity}
           </span>
           <svg

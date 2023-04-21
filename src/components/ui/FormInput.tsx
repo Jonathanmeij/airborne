@@ -36,7 +36,7 @@ type InputProps = React.DetailedHTMLProps<
 export const Input = ({ ...props }: InputProps) => {
   return (
     <input
-      className="placeholder:bunker-700 w-full rounded border border-bunker-800 bg-bunker-800 p-2"
+      className="placeholder:zinc-700 w-full rounded border border-zinc-800 bg-zinc-800 p-2"
       {...props}
     />
   );

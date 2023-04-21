@@ -21,7 +21,7 @@ export default function ProductDisclosure({
 
   return (
     <div
-      className={`mx-auto h-max w-full rounded border border-bunker-800 bg-bunker-900 p-3 ${
+      className={`mx-auto h-max w-full rounded border border-zinc-800 bg-zinc-900 p-3 ${
         className || ""
       }`}
     >

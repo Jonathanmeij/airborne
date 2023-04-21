@@ -60,7 +60,7 @@ export default function CartPage() {
         maxWidth="7xl"
         className="relative m-auto flex h-full flex-col-reverse justify-end gap-6  pt-6 lg:flex-row"
       >
-        <div className="h-max w-full rounded border border-bunker-800 bg-bunker-900 p-3 lg:w-7/12 lg:p-6">
+        <div className="h-max w-full rounded border border-zinc-800 bg-zinc-900 p-3 lg:w-7/12 lg:p-6">
           <Container maxWidth="md" className="m-auto" padding="none">
             <ProgressBar steps={3} currentStep={step} />
 
@@ -78,7 +78,7 @@ export default function CartPage() {
             </ResizablePanel>
           </Container>
         </div>
-        <div className="hidden h-max rounded border border-bunker-800 bg-bunker-900 p-3 lg:block lg:w-5/12 lg:p-6">
+        <div className="hidden h-max rounded border border-zinc-800 bg-zinc-900 p-3 lg:block lg:w-5/12 lg:p-6">
           <h2 className=" text-xl font-medium">
             Your <span className=" font-bold"> order</span>
           </h2>
@@ -140,7 +140,7 @@ function Information({ information, setInformation }: InformationProps) {
         <h2 className=" text-xl font-normal">
           Personal <span className=" font-semibold"> information</span>
         </h2>
-        <p className=" text-sm text-gray-500">
+        <p className=" text-sm text-zinc-500">
           {`This is a fake store, don't use real information.`}
         </p>
       </div>
@@ -271,7 +271,7 @@ function Payment() {
         <h2 className=" text-xl font-normal">
           payment <span className=" font-semibold"> information</span>
         </h2>
-        <p className=" text-sm text-gray-500">
+        <p className=" text-sm text-zinc-500">
           {`This is a fake store, don't use real information.`}
         </p>
       </div>
@@ -338,16 +338,16 @@ function CartPanel({ shipping }: { shipping?: ShippingOption }) {
   const { cart, calculateTotal } = useCartContext();
 
   if (cart.length === 0)
-    return <p className="pt-3 text-gray-400">Your cart is empty</p>;
+    return <p className="pt-3 text-zinc-400">Your cart is empty</p>;
 
   return (
     <>
-      <div className=" divide-y divide-bunker-800">
+      <div className=" divide-y divide-zinc-800">
         {cart.map((item) => (
           <CartItem key={item.id} CartItem={item} dark />
         ))}
       </div>
-      <div className=" border-t border-bunker-800 py-3 text-sm md:py-6">
+      <div className=" border-t border-zinc-800 py-3 text-sm md:py-6">
         <div>
           <span className="">Subtotal:</span>
           <span className="float-right flex items-center gap-3">
@@ -361,7 +361,7 @@ function CartPanel({ shipping }: { shipping?: ShippingOption }) {
           </span>
         </div>
       </div>
-      <div className=" border-t border-bunker-800 pt-3 md:pt-6">
+      <div className=" border-t border-zinc-800 pt-3 md:pt-6">
         <span className="">Total:</span>
         <span className="float-right flex items-center gap-3">
           <span className="text-xs font-light ">Euro</span>
@@ -392,10 +392,10 @@ function ShippingRadio({ shipping, setShipping }: ShipingProps) {
               }
                   ${
                     checked
-                      ? "border-sky-500 bg-bunker-800 bg-opacity-75 "
-                      : "bg-bunker-800"
+                      ? "border-sky-500 bg-zinc-800 bg-opacity-75 "
+                      : "bg-zinc-800"
                   }
-                    relative flex cursor-pointer rounded border-2 border-bunker-800 
+                    relative flex cursor-pointer rounded border-2 border-zinc-800 
                     p-3 shadow-md focus:outline-none`
             }
           >
@@ -407,7 +407,7 @@ function ShippingRadio({ shipping, setShipping }: ShipingProps) {
                       <RadioGroup.Label
                         as="p"
                         className={`font-semibold  ${
-                          checked ? "text-white" : "text-gray-200"
+                          checked ? "text-white" : "text-zinc-200"
                         }`}
                       >
                         {ship.name}
@@ -415,7 +415,7 @@ function ShippingRadio({ shipping, setShipping }: ShipingProps) {
                       <RadioGroup.Description
                         as="span"
                         className={`inline ${
-                          checked ? "text-sky-100" : "text-gray-100"
+                          checked ? "text-sky-100" : "text-zinc-100"
                         }`}
                       >
                         <span>
@@ -467,12 +467,12 @@ function ProgressBar({
 
 const stepVariants = {
   inactive: {
-    backgroundColor: "var(--bunker-900)",
+    backgroundColor: "var(--zinc-900)",
     border: "2px solid",
-    borderColor: "var(--bunker-800)",
+    borderColor: "var(--zinc-800)",
   },
   active: {
-    backgroundColor: "var(--bunker-900)",
+    backgroundColor: "var(--zinc-900)",
     border: "2px solid",
     borderColor: "var(--sky-500)",
   },
@@ -495,7 +495,7 @@ function Step({ step, currentStep }: { step: number; currentStep: number }) {
 
   return (
     <motion.div
-      className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-bunker-800"
+      className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-zinc-800"
       variants={stepVariants}
       animate={status}
     >

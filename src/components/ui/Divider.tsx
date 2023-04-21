@@ -4,6 +4,6 @@ interface DividerProps {
 
 export default function Divider({ className }: DividerProps) {
   return (
-    <div className={`h-[1px] w-full bg-bunker-800 ${className ?? ""}`}></div>
+    <div className={`h-[1px] w-full bg-zinc-800 ${className ?? ""}`}></div>
   );
 }

@@ -94,7 +94,7 @@ const ProductPage: NextPage<{ title_id: string }> = ({ title_id }) => {
             </div>
           </Container>
         </div>
-        <div className="bg-bunker-900 py-6">
+        <div className="bg-zinc-900 py-6">
           <Container maxWidth="7xl" className=" m-auto h-screen w-full">
             <ProductDisclosure title="Description">
               {product.description}
@@ -235,8 +235,8 @@ function RadioButton({ label, value, register, checked }: RadioButtonProps) {
       />
       <label
         htmlFor={value}
-        className="peer-chering-offset-bunker-900 block w-max cursor-pointer select-none rounded  bg-bunker-900 
-        px-2 py-1 ring-bunker-700 peer-checked:bg-bunker-800   peer-checked:ring-2"
+        className="peer-chering-offset-zinc-900 block w-max cursor-pointer select-none rounded  bg-zinc-900 
+        px-2 py-1 ring-zinc-700 peer-checked:bg-zinc-800   peer-checked:ring-2"
       >
         {label}
       </label>
@@ -264,7 +264,7 @@ function ColorRadioButton({
         htmlFor={label}
         style={{ backgroundColor: value }}
         className="block h-8 w-8 cursor-pointer select-none rounded-full 
-        ring-2 ring-bunker-800 ring-offset-bunker-900 peer-checked:ring-2  peer-checked:ring-bunker-300 peer-checked:ring-offset-2"
+        ring-2 ring-zinc-800 ring-offset-zinc-900 peer-checked:ring-2  peer-checked:ring-zinc-300 peer-checked:ring-offset-2"
       ></label>
     </div>
   );

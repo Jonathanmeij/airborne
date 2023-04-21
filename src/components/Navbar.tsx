@@ -166,37 +166,37 @@ function MobileMenu() {
                 >
                   <Container maxWidth="7xl" className="m-auto">
                     <div className=" overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                      <div className="relative grid gap-3 bg-white p-4 text-bunker-950 lg:grid-cols-2">
+                      <div className="relative grid gap-3 bg-white p-4 text-zinc-950 lg:grid-cols-2">
                         <MenuItem close={close} href="/product/sailor-v2">
                           <span className="flex items-center">
-                            <span className="text-lg font-medium text-gray-900">
+                            <span className="text-lg font-medium text-zinc-900">
                               Sailor V2
                             </span>
                           </span>
-                          <span className="block text-sm text-gray-500">
+                          <span className="block text-sm text-zinc-500">
                             All around kite
                           </span>
                         </MenuItem>
                         <MenuItem close={close} href="/product/surfshield">
                           <span className="flex items-center">
-                            <span className="text-lg font-medium text-gray-900">
+                            <span className="text-lg font-medium text-zinc-900">
                               Surfshield
                             </span>
                           </span>
-                          <span className="block text-sm text-gray-500">
+                          <span className="block text-sm text-zinc-500">
                             Wetsuit specially designed for rough conditions
                           </span>
                         </MenuItem>
                         <MenuItem close={close} href="/product/glide-v1">
-                          <span className="text-lg font-medium text-gray-900">
+                          <span className="text-lg font-medium text-zinc-900">
                             Glide V1
                           </span>
-                          <span className="block text-sm text-gray-500">
+                          <span className="block text-sm text-zinc-500">
                             Easy to use and fast board
                           </span>
                         </MenuItem>
                       </div>
-                      <div className="bg-gray-100 p-4">
+                      <div className="bg-zinc-100 p-4">
                         <MenuItem close={close} href="/account">
                           <div className="flex items-center gap-3 ">
                             <svg
@@ -211,7 +211,7 @@ function MobileMenu() {
                                 d="M19 7.001c0 3.865-3.134 7-7 7s-7-3.135-7-7c0-3.867 3.134-7.001 7-7.001s7 3.134 7 7.001zm-1.598 7.18c-1.506 1.137-3.374 1.82-5.402 1.82-2.03 0-3.899-.685-5.407-1.822-4.072 1.793-6.593 7.376-6.593 9.821h24c0-2.423-2.6-8.006-6.598-9.819z"
                               />
                             </svg>
-                            <span className="  font-medium text-gray-900">
+                            <span className="  font-medium text-zinc-900">
                               Account
                             </span>
                           </div>
@@ -242,7 +242,7 @@ function MenuItem({
     <Link href={href} onClick={close}>
       <motion.div
         variants={itemVariant}
-        className="flow-root origin-top-right rounded-md px-2 py-2  hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-sky-400 focus-visible:ring-opacity-50"
+        className="flow-root origin-top-right rounded-md px-2 py-2  hover:bg-zinc-100 focus:outline-none focus-visible:ring focus-visible:ring-sky-400 focus-visible:ring-opacity-50"
       >
         <span className="flex-row items-center">{children}</span>
       </motion.div>

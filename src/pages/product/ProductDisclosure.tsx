@@ -18,7 +18,7 @@ export default function ProductDisclosure({
   };
 
   return (
-    <div className="mx-auto w-full border-y border-bunker-800">
+    <div className="mx-auto w-full border-y border-zinc-800">
       <Disclosure>
         {({ open }) => (
           <>
