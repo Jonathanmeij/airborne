@@ -147,6 +147,7 @@ function ProductForm({ product }: { product: Product }) {
     price: product.price,
     image: product.image,
     sizes: product.sizes,
+    productType: product.productType,
     createdAt: product.createdAt,
     updatedAt: product.updatedAt,
   };

@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { Button, Container, ListBox } from "~/components/ui";
+import { Button, Container } from "~/components/ui";
 import aboutUs from "../../../public/images/home/about_us.png";
-import { ListboxElement, Option } from "~/components/ui/Input";
+import { ListboxElement, type Option } from "~/components/ui/Input";
 import { useState } from "react";
 
 export default function CollectionPage() {
