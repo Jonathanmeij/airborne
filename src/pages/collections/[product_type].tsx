@@ -1,6 +1,8 @@
 import Image from "next/image";
-import { Container } from "~/components/ui";
+import { Button, Container, ListBox } from "~/components/ui";
 import aboutUs from "../../../public/images/home/about_us.png";
+import { ListboxElement, Option } from "~/components/ui/Input";
+import { useState } from "react";
 
 export default function CollectionPage() {
   return (
@@ -15,9 +17,34 @@ export default function CollectionPage() {
 }
 
 function ProductSection() {
+  const [sortBy, setSortBy] = useState<Option>(options[0] as Option);
+
   return (
-    <Container maxWidth="7xl" className="m-auto min-h-screen py-3 md:py-6">
-      <h1 className="text-3xl font-semibold md:text-4xl">Kites</h1>
+    <Container
+      maxWidth="7xl"
+      className="m-auto flex min-h-screen flex-col gap-6 py-3 md:py-6"
+    >
+      <div>
+        <h1 className="pb-3 text-3xl font-semibold md:text-4xl">Kites</h1>
+        <div className="flex w-full justify-between ">
+          <ListboxElement
+            options={options}
+            setSelected={setSortBy}
+            selected={sortBy}
+          />
+          <Button font="normal" rounded="rounded" color="secondaryDarker">
+            Filter
+          </Button>
+        </div>
+      </div>
     </Container>
   );
 }
+
+const options: Option[] = [
+  { value: "Featured" },
+  { value: "Price: Low to High" },
+  { value: "Price: High to Low" },
+  { value: "Newest" },
+  { value: "Oldest" },
+];
