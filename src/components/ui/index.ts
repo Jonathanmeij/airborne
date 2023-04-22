@@ -7,6 +7,7 @@ import { Input, ListboxElement, TextArea } from "./Input";
 import { Modal, ModalBody, ModalFooter, ModalHeader } from "./Modal";
 import Container from "./Container";
 import { ResizablePanel } from "./ResiziblePanel";
+import { SideMenu } from "./SideMenu";
 
 export {
   Divider,
@@ -23,4 +24,5 @@ export {
   ModalHeader,
   Container,
   ResizablePanel,
+  SideMenu,
 };

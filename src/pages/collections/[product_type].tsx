@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Button, Container } from "~/components/ui";
+import { Button, Container, SideMenu } from "~/components/ui";
 import aboutUs from "../../../public/images/home/about_us.png";
 import { ListboxElement, type Option } from "~/components/ui/Input";
 import { useState } from "react";
@@ -32,9 +32,13 @@ function ProductSection() {
             setSelected={setSortBy}
             selected={sortBy}
           />
-          <Button font="normal" rounded="rounded" color="secondaryDarker">
-            Filter
-          </Button>
+          <SideMenu title="Filter">
+            <div className="flex flex-col gap-2">
+              <Button>Price</Button>
+              <Button>Size</Button>
+              <Button>Color</Button>
+            </div>
+          </SideMenu>
         </div>
       </div>
     </Container>
