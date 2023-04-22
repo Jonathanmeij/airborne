@@ -4,13 +4,14 @@
 import { cva, type VariantProps } from "class-variance-authority";
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-export const buttonStyles = cva("font-medium  border-1", {
+export const buttonStyles = cva("  border-1", {
   variants: {
     color: {
       primary: " bg-sky-500 text-white hover:bg-sky-600  ",
       secondary:
         " bg-white text-black  text-san-marino-900 hover:bg-zinc-200 shadow-md",
       secondaryDark: " bg-zinc-800 text-white hover:bg-zinc-700 ",
+      secondaryDarker: " bg-zinc-900 text-white hover:bg-zinc-800 ",
       black: " bg-zinc-950 text-white hover:bg-zinc-900 ",
       none: "bg-transparent hover:bg-san-marino-50 border-0",
       noneLight: "bg-transparent text-zinc-200  border-0",
