@@ -81,11 +81,14 @@ const Home: NextPage = () => {
               src={bg}
               alt="kiteboarder jumping"
               className="z-0 hidden h-screen w-screen object-cover contrast-125 saturate-[20%] md:block"
+              priority
+              placeholder="blur"
             ></Image>
             <Image
               src={mobile}
               alt="kiteboarder jumping"
               className="z-0 block  h-screen w-screen object-cover contrast-125 saturate-[20%] md:hidden"
+              placeholder="blur"
             ></Image>
           </motion.div>
           <Container maxWidth="7xl" className=" relative z-20 m-auto">
