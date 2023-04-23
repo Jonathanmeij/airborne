@@ -37,13 +37,13 @@ export const productRouter = createTRPCRouter({
   getProductsByType: publicProcedure
     .input(
       z.object({
-        type: z.enum(["KITE", "BOARD", "WETSUIT"]),
+        type: z.enum(["KITE", "BOARD", "BAR", "WETSUIT"]),
       })
     )
     .query(({ input, ctx }) => {
       return ctx.prisma.product.findMany({
         where: {
-          productType: input.type,
+          type: input.type,
         },
       });
     }),
