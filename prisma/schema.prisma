@@ -75,7 +75,7 @@ model Product {
     image       String
     sizes       String[]
     colors      Color[]
-    productType productType
+    type        productType
     createdAt   DateTime @default(now())
     updatedAt   DateTime @updatedAt
 }

@@ -31,7 +31,7 @@ async function main() {
       },
       sizes: ["6", "7", "8", "9", "10", "11", "12"],
       title_id: "sailor-v2",
-      productType: "KITE",
+      type: "KITE",
     },
   });
   await prisma.product.upsert({
@@ -59,7 +59,7 @@ async function main() {
       },
       sizes: ["S", "M", "L", "XL"],
       title_id: "surfshield",
-      productType: "WETSUIT",
+      type: "WETSUIT",
     },
   });
   await prisma.product.upsert({
@@ -91,7 +91,7 @@ async function main() {
       },
       sizes: ["125 X 38", "133 X 40", "138 X 41", "141 X 42"],
       title_id: "glide-v1",
-      productType: "BOARD",
+      type: "BOARD",
     },
   });
 }
