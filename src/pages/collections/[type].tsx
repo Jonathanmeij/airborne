@@ -59,7 +59,7 @@ export const ProductTypePage: NextPage<{ productType: ProductType }> = ({
         sortBy={sortBy}
         setSortBy={setSortBy}
       />
-      <ProductsSection />
+      <ProductsSection products={testProducts} />
     </div>
   );
 };
@@ -80,7 +80,7 @@ export function ProductsOptions({
   return (
     <Container
       maxWidth="7xl"
-      className="m-auto flex min-h-screen flex-col gap-6 py-3 md:py-6"
+      className="m-auto flex  flex-col gap-6 py-3 md:py-6"
     >
       <div>
         <h1 className="pb-3 text-3xl font-semibold md:text-4xl">{title}s</h1>
